@@ -117,9 +117,12 @@ body.homepage {
 .image-slide {
   flex-shrink: 0; 
   height: 100%;
-  /* MODIFICA: Margine tra le immagini */
-  margin-right: 30px; /* Spazio tra le slide */
+  /* MODIFICA: Aumento il margine per contenere il numero */
+  margin-right: 50px; 
   position: relative; 
+  /* NUOVO: Padding a sinistra per creare lo spazio per il numero */
+  padding-left: 20px; 
+  box-sizing: border-box; /* Importante per il padding */
 }
 
 .image-slide img,
@@ -132,12 +135,12 @@ body.homepage {
 /* NUOVO: Stile per il numero della slide */
 .slide-number {
   position: absolute;
-  top: -20px; /* Sposta il numero sopra l'immagine, nel margine */
-  left: -20px; /* Sposta il numero a sinistra dell'immagine, nel margine */
-  font-size: 13px; /* Stessa dimensione del body per coerenza */
+  top: 0; /* Allineato in alto con l'immagine */
+  left: 0; /* Allineato a sinistra del padding */
+  font-size: 13px; 
   color: black;
-  z-index: 5; /* Assicura che sia sopra l'immagine */
-  white-space: nowrap; /* Evita che il numero vada a capo */
+  z-index: 5; 
+  white-space: nowrap; 
 }
 
 
@@ -306,8 +309,14 @@ body.homepage {
 
   /* MODIFICA: Regolato il numero per mobile */
   .slide-number {
-      top: -15px; /* Ancora più in alto per mobile */
-      left: -10px; /* Ancora più a sinistra per mobile */
+      top: 0; /* Allineato in alto */
+      left: 0; /* Allineato a sinistra del padding */
+  }
+
+  /* MODIFICA: Ridotto il margine e padding per mobile */
+  .image-slide {
+      margin-right: 30px; /* Margine minore per mobile */
+      padding-left: 15px; /* Padding minore per mobile */
   }
 
   .caption {
