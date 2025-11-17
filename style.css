@@ -56,23 +56,20 @@ body.homepage {
   padding: 8px 10px 10px 10px; 
   margin: 0; 
 
-  background-color: white; /* MODIFICA: Sfondo bianco */
+  background-color: white; 
   z-index: 1000; 
-  color: black; /* MODIFICA: Testo nero */
-  /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
+  color: black; 
 
   font-weight: normal;
   font-size: inherit;
   font-family: inherit;
   
-  /* Aggiunto per separazione */
-  border-bottom: 1px solid black; 
-  box-sizing: border-box; /* Assicura che il padding sia incluso */
+  /* MODIFICA: Rimosso border-bottom */
+  box-sizing: border-box; 
 }
 
 .footer1 a {
-    color: black; /* MODIFICA: Testo nero */
-    /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
+    color: black; 
     text-decoration: none;
 }
 
@@ -105,12 +102,12 @@ body.homepage {
 
 .gallery-container.fullscreen {
   width: 100vw; 
-  height: 80vh; /* MODIFICA: Ridotta a 80% */
+  height: 80vh; 
   margin: 0;
   
-  /* MODIFICA: Aggiunto padding per l'header fisso */
-  padding-top: 70px; /* Regola questo valore se l'header è più alto */
-  box-sizing: border-box; /* Importante per il calcolo dell'altezza */
+  /* MODIFICA: Ridotto padding-top per avvicinare all'header */
+  padding-top: 55px; 
+  box-sizing: border-box; 
 }
 
 .image-wrapper {
@@ -192,11 +189,12 @@ body.homepage {
 /* ------------------------------------- */
 
 .index-section {
-  padding: 40px 20px; /* Spazio sopra e sotto l'indice */
+  /* MODIFICA: Ridotto padding-top per avvicinare alla galleria */
+  padding: 15px 20px 40px 20px; 
   text-align: left;
   width: 100%;
-  max-width: 1000px; /* Larghezza massima dell'indice */
-  margin: 0 auto; /* Centra l'indice */
+  max-width: 1000px; 
+  margin: 0 auto; 
   box-sizing: border-box; 
   color: black; 
 }
@@ -205,33 +203,34 @@ body.homepage {
   display: grid;
   /* 5 colonne: N., Titolo, Anno, Categoria, Cliente */
   grid-template-columns: 0.6fr 1.5fr 0.6fr 1fr 1fr;
-  gap: 10px 15px; /* Spazio tra righe e colonne */
+  /* MODIFICA: Ridotto row-gap (interlinea) */
+  gap: 4px 15px; 
   width: 100%;
-  border-top: 1px solid black; 
+  /* MODIFICA: Rimosso border-top */
   padding-top: 10px;
 }
 
 .index-header {
   font-weight: normal; 
   padding-bottom: 5px;
-  border-bottom: 1px solid black;
+  /* MODIFICA: Rimosso border-bottom */
 }
 
 /* QUESTA È LA RIGA CLICCABILE (IL LINK <a>) */
 .index-row {
-  display: contents; /* Fa sì che i figli (i div) si allineino alla griglia! */
+  display: contents; 
   text-decoration: none;
   color: black;
 }
 
 .index-item {
-  padding-bottom: 5px; 
-  text-decoration: none; /* Nessuna sottolineatura di default */
+  /* MODIFICA: Rimosso padding-bottom per compattare */
+  text-decoration: none; 
 }
 
 /* Effetto al passaggio del mouse sull'intera riga */
 .index-row:hover .index-item {
-   text-decoration: underline; /* Sottolinea tutti gli item della riga */
+   text-decoration: underline; 
 }
 
 
@@ -251,13 +250,11 @@ body.homepage {
   justify-content: space-between; 
   gap: 55px;
   max-width: none; 
-  color: black; /* MODIFICA: Testo nero */
-  /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
+  color: black;
 }
 
 .clients a {
-    color: black; /* MODIFICA: Testo nero */
-    /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
+    color: black;
 }
 
 .clients > div {
@@ -301,7 +298,8 @@ body.homepage {
 
   .gallery-container.fullscreen {
       height: 80vh;
-      padding-top: 90px; /* Più spazio per header mobile */
+      /* MODIFICA: Ridotto padding-top mobile */
+      padding-top: 85px; 
   }
 
   .caption {
@@ -321,9 +319,8 @@ body.homepage {
   
   /* ⬇️ NUOVE REGOLE INDICE (Mobile) ⬇️ */
   .index-grid {
-     /* Mantiene le 5 colonne ma le rende scorrevoli */
      grid-template-columns: 0.5fr 1.5fr 0.5fr 1fr 1fr;
-     overflow-x: auto; /* Aggiunge lo scroll orizzontale */
+     overflow-x: auto; 
      padding-bottom: 10px; 
   }
   
@@ -333,7 +330,8 @@ body.homepage {
       padding-left: 10px;
       padding-right: 10px;
       max-width: none; 
-      padding-top: 170px; /* Aumentato per l'header mobile più alto */
+      /* MODIFICA: Ridotto padding-top per header mobile */
+      padding-top: 140px; 
       margin-left: 0;
       margin-right: 0;
   }
