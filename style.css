@@ -25,7 +25,7 @@ body {
 }
 
 body.homepage {
-  /* overflow: hidden; */ /* MODIFICA: Permette lo scorrimento */
+  /* MODIFICA: Permette lo scorrimento */
   overflow-y: auto;
   padding-top: 0; 
 }
@@ -105,8 +105,7 @@ body.homepage {
 
 .gallery-container.fullscreen {
   width: 100vw; 
-  /* height: 100vh; */ /* MODIFICA: Ridotta a 80% */
-  height: 80vh;
+  height: 80vh; /* MODIFICA: Ridotta a 80% */
   margin: 0;
   
   /* MODIFICA: Aggiunto padding per l'header fisso */
@@ -199,41 +198,40 @@ body.homepage {
   max-width: 1000px; /* Larghezza massima dell'indice */
   margin: 0 auto; /* Centra l'indice */
   box-sizing: border-box; 
-  color: black; /* Assicura testo nero */
+  color: black; 
 }
 
-.index-section h2 {
-  font-size: inherit; /* Stessa dimensione del body */
-  line-height: inherit;
-  font-weight: normal;
-  margin: 0 0 20px 0;
+.index-grid {
+  display: grid;
+  /* 5 colonne: N., Titolo, Anno, Categoria, Cliente */
+  grid-template-columns: 0.6fr 1.5fr 0.6fr 1fr 1fr;
+  gap: 10px 15px; /* Spazio tra righe e colonne */
+  width: 100%;
+  border-top: 1px solid black; 
+  padding-top: 10px;
+}
+
+.index-header {
+  font-weight: normal; 
   padding-bottom: 5px;
-  border-bottom: 1px solid black; /* Linea separatrice */
+  border-bottom: 1px solid black;
 }
 
-.index-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  
-  /* Colonne per desktop */
-  columns: 2 200px; /* Crea 2 colonne (o più se c'è spazio) */
-  -webkit-columns: 2 200px;
-  -moz-columns: 2 200px;
-  column-gap: 30px;
+/* QUESTA È LA RIGA CLICCABILE (IL LINK <a>) */
+.index-row {
+  display: contents; /* Fa sì che i figli (i div) si allineino alla griglia! */
+  text-decoration: none;
+  color: black;
 }
 
-.index-list li {
-  margin-bottom: 8px; /* Spazio tra gli item */
-  /* text-decoration: underline; */ /* Opzionale: se vuoi sottolineare */
+.index-item {
+  padding-bottom: 5px; 
+  text-decoration: none; /* Nessuna sottolineatura di default */
 }
 
-.index-list li a {
-    color: black;
-    text-decoration: none;
-}
-.index-list li a:hover {
-    text-decoration: underline; /* Sottolinea solo in hover */
+/* Effetto al passaggio del mouse sull'intera riga */
+.index-row:hover .index-item {
+   text-decoration: underline; /* Sottolinea tutti gli item della riga */
 }
 
 
@@ -244,19 +242,15 @@ body.homepage {
 .clients {
   padding-top: 140px; 
   padding-bottom: 70px; 
-
   padding-left: 10px;
   padding-right: 10px;
-
   margin-left: 0; 
   margin-right: 0; 
-
   text-align: left; 
   display: flex; 
   justify-content: space-between; 
-  gap: 55px; /* Spazio tra colonne */
+  gap: 55px;
   max-width: none; 
-
   color: black; /* MODIFICA: Testo nero */
   /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
 }
@@ -266,16 +260,11 @@ body.homepage {
     /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
 }
 
-/* ✨ MODIFICA: Tre colonne di larghezza uguale (33.33%) */
 .clients > div {
     flex-basis: 33.33%; 
     flex-grow: 1;
     flex-shrink: 1;
-
-    /* Bilancia le righe per evitare vedove */
     text-wrap: balance;
-
-    /* Permette la sillabazione */
     hyphens: auto; 
 }
 
@@ -302,7 +291,7 @@ body.homepage {
     flex-direction: column; 
     align-items: flex-start;
     padding: 8px 10px;
-    height: auto; /* Altezza automatica */
+    height: auto; 
   }
 
   .header-right {
@@ -311,10 +300,8 @@ body.homepage {
   }
 
   .gallery-container.fullscreen {
-      /* height: 100vh; */ /* MODIFICA */
       height: 80vh;
-      /* MODIFICA: Più spazio per header mobile (che è più alto) */
-      padding-top: 90px; 
+      padding-top: 90px; /* Più spazio per header mobile */
   }
 
   .caption {
@@ -322,45 +309,41 @@ body.homepage {
       left: 10px;
   }
 
-  /* Il video ignora i tocchi */
   .video-toggle {
       pointer-events: none;
       z-index: 1; 
   }
 
-  /* L'overlay è attivo e cattura i tocchi */
   .video-overlay {
       display: block; 
       z-index: 2; 
   }
   
   /* ⬇️ NUOVE REGOLE INDICE (Mobile) ⬇️ */
-  .index-list {
-    columns: 1; /* Una sola colonna su mobile */
-    -webkit-columns: 1;
-    -moz-columns: 1;
+  .index-grid {
+     /* Mantiene le 5 colonne ma le rende scorrevoli */
+     grid-template-columns: 0.5fr 1.5fr 0.5fr 1fr 1fr;
+     overflow-x: auto; /* Aggiunge lo scroll orizzontale */
+     padding-bottom: 10px; 
   }
   
   .clients {
       flex-direction: column; 
       gap: 30px; 
-
       padding-left: 10px;
       padding-right: 10px;
       max-width: none; 
-
       padding-top: 170px; /* Aumentato per l'header mobile più alto */
       margin-left: 0;
       margin-right: 0;
   }
 
   /* ⬇️ CORREZIONE SINTASSI APPLICATA QUI ⬇️ */
-  /* Assicura che il reset si applichi a tutte le colonne */
   .clients .colonna1,
   .clients .colonna2,
   .clients .colonna3,
   .clients .colonna4 {
-      flex-basis: auto; /* CORREZIONE: Era scritto male */
+      flex-basis: auto; 
   }
   /* ⬆️ FINE CORREZIONE ⬆️ */
 
