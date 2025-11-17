@@ -231,52 +231,52 @@ body.homepage {
 
 
 /* ------------------------------------- */
-/* 📄 NUOVE REGOLE PAGINA PROGETTO (SOVRAPPOSIZIONE) 📄 */
+/* 📄 NUOVE REGOLE PAGINA PROGETTO (SOVRAPPOSIZIONE E COLONNE) 📄 */
 /* ------------------------------------- */
 
-/* Usiamo questo wrapper per centrare il contenuto */
-.project-content-wrapper {
-  max-width: 1000px; /* Stessa larghezza dell'indice */
+.project-page-wrapper {
+  position: relative; /* Contenitore per lo scorrimento */
+  padding-top: 100px; /* Spazio per l'header fisso e un po' di margine */
+  max-width: 1000px; /* Larghezza massima del contenuto */
   margin: 0 auto;
-  padding: 0 20px; /* Stesso padding dell'indice */
+  padding-left: 20px; /* Spazio laterale */
+  padding-right: 20px; /* Spazio laterale */
   box-sizing: border-box;
 }
 
 .project-text {
-  /* Questo è il blocco di testo che si attacca in alto */
-  position: -webkit-sticky;
+  /* Il testo rimane "attaccato" in alto e sta sotto le immagini */
   position: sticky;
-  top: 55px; /* Altezza dell'header (regola se necessario) */
+  top: 100px; /* Si attacca a 100px dall'alto (dopo header e margine) */
+  width: 60%; /* Esempio: 60% della larghezza disponibile del wrapper */
+  padding-right: 30px; /* Spazio tra testo e immagini */
+  box-sizing: border-box; /* Include padding nella larghezza */
   
-  padding-top: 20px; /* Spazio dal'header */
-  padding-bottom: 20px; /* Spazio sotto il testo */
-  
-  background-color: white; /* FONDAMENTALE: copre le immagini sotto */
-  z-index: 10; /* Sta sopra le immagini */
-  
-  /* Stile "come l'indice" */
   text-align: left;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  z-index: 1; /* Il testo deve stare sotto le immagini */
 }
 
 .project-images {
-  /* Questo è il contenitore per le immagini */
-  position: relative;
-  z-index: 5; /* Sta sotto il testo */
+  /* Le immagini scorrono "sopra" il testo */
+  position: absolute; /* Posizionato sopra il flusso normale */
+  top: 100px; /* Inizia alla stessa altezza del testo sticky */
+  left: 60%; /* Inizia dopo il 60% del testo */
+  width: 40%; /* Esempio: 40% della larghezza disponibile del wrapper */
   
-  /* Creiamo spazio per le immagini */
   display: flex;
   flex-direction: column;
   gap: 15px; /* Spazio tra le immagini */
   
-  /* Spazio finale in fondo alla pagina */
-  padding-bottom: 50px; 
+  z-index: 2; /* Le immagini devono stare sopra il testo */
+  
+  /* Aggiungi un margine destro per lo scrolling, se necessario, ma qui non serve se usiamo la larghezza */
 }
 
 .project-images img {
-  width: 100%; 
+  width: 100%; /* Le immagini riempiono la loro colonna */
   height: auto;
   display: block;
 }
@@ -353,9 +353,22 @@ body.homepage {
   }
 
   /* 📄 REGOLE PROGETTO (Mobile) 📄 */
+  .project-page-wrapper {
+      padding-top: 140px; /* Più spazio per l'header mobile */
+  }
+
   .project-text {
-      /* Su mobile, l'header fisso è più alto */
-      top: 85px; 
+      position: static; /* Testo non sticky su mobile */
+      width: 100%; /* Occupa tutta la larghezza */
+      padding-right: 0;
+      margin-bottom: 20px; /* Spazio tra testo e immagini */
+  }
+
+  .project-images {
+      position: static; /* Immagini non assolute su mobile */
+      width: 100%; /* Occupano tutta la larghezza */
+      top: auto;
+      left: auto;
   }
 
 }
