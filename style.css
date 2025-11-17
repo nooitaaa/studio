@@ -1,0 +1,303 @@
+/* ⚙️ REGOLE FONDAMENTALI ORIGINALI */
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover, a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Times New Roman", Times, serif; 
+  font-weight: normal; 
+  background-color: white; 
+  font-size: 13px; 
+  line-height: 15px; 
+  color: black;
+  text-align: center;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.homepage {
+    overflow: hidden;
+    padding-top: 0; 
+}
+
+::selection {
+    background: #FFFF00; 
+    color: black;
+}
+::-moz-selection { 
+    background: #FFFF00;
+    color: black;
+}
+
+/* ------------------------------------- */
+/* 🔝 HEADER FISSO (CLASSE .footer1) */
+/* ------------------------------------- */
+
+.footer1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; 
+
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start; 
+
+  padding: 8px 10px 10px 10px; 
+  margin: 0; 
+
+  background-color: transparent; 
+  z-index: 1000; 
+  color: white; 
+  mix-blend-mode: difference; 
+
+  font-weight: normal;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.footer1 a {
+    color: white;
+    mix-blend-mode: difference;
+    text-decoration: none;
+}
+
+.header-link {
+    color: inherit; 
+    text-decoration: none;
+}
+
+.header-left {
+    text-align: left;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.header-location {
+    margin-top: 0; 
+}
+
+/* ------------------------------------- */
+/* 🎞️ REGOLE GALLERIA SCORREVOLE */
+/* ------------------------------------- */
+
+.gallery-container {
+  overflow-x: auto; 
+  overflow-y: hidden;
+  display: block; 
+}
+
+.gallery-container.fullscreen {
+  width: 100vw; 
+  height: 100vh; 
+  margin: 0;
+}
+
+.image-wrapper {
+  display: flex; 
+  height: 100%;
+  white-space: nowrap; 
+}
+
+.image-slide {
+  flex-shrink: 0; 
+  height: 100%;
+  margin-right: 0; 
+  position: relative; 
+}
+
+.image-slide img,
+.image-slide video {
+  height: 100%; 
+  width: auto; 
+  display: block;
+}
+
+/* Il cursore "mano" appare solo su desktop */
+@media (hover: hover) {
+    .video-toggle {
+        cursor: pointer;
+    }
+}
+
+/* Nasconde i controlli di default (incluso il play di iOS) */
+.video-toggle::-webkit-media-controls {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+.video-toggle::-webkit-media-controls-play-button,
+.video-toggle::-webkit-media-controls-panel,
+.video-toggle::-webkit-media-controls-volume-slider,
+.video-toggle::-webkit-media-controls-mute-button,
+.video-toggle::-webkit-media-controls-timeline,
+.video-toggle::-webkit-media-controls-current-time-display,
+.video-toggle::-webkit-media-controls-time-remaining-display,
+.video-toggle::-webkit-media-controls-fullscreen-button {
+    display: none !important;
+    -webkit-appearance: none; 
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Overlay trasparente (invisibile su desktop) */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; 
+    display: none; 
+}
+
+
+.caption {
+  position: absolute;
+  bottom: 30px; 
+  left: 10px; 
+
+  color: white;
+  mix-blend-mode: difference;
+  z-index: 10; 
+
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* ------------------------------------- */
+/* 👥 REGOLE SEZIONE INFO (Pagina about.html) */
+/* ------------------------------------- */
+
+.clients {
+  padding-top: 140px; 
+  padding-bottom: 70px; 
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  margin-left: 0; 
+  margin-right: 0; 
+
+  text-align: left; 
+  display: flex; 
+  justify-content: space-between; 
+  gap: 55px; /* Spazio tra colonne */
+  gap: 55px; 
+  max-width: none; 
+
+  color: white; 
+  mix-blend-mode: difference;
+}
+
+.clients a {
+    color: white;
+    mix-blend-mode: difference;
+}
+
+/* ✨ MODIFICA: Ripristinate 4 colonne (25%) */
+/* ✨ MODIFICA: Tre colonne di larghezza uguale (33.33%) */
+.clients > div {
+    flex-basis: 25%; 
+    flex-basis: 33.33%; 
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    /* Bilancia le righe per evitare vedove */
+    text-wrap: balance;
+
+    /* Permette la sillabazione */
+    hyphens: auto; 
+}
+
+.clients .colonna3 br:first-child {
+    display: none;
+}
+
+.clients .colonna4 {
+    text-align: left; 
+    margin-top: 0; 
+}
+
+/* ------------------------------------- */
+/* 📱 REGOLE MEDIA QUERY (MOBILE) */
+/* ------------------------------------- */
+
+@media screen and (max-width: 840px) {
+
+  body.homepage {
+      padding-top: 0;
+  }
+
+  .footer1 {
+    flex-direction: column; 
+    align-items: flex-start;
+    padding: 8px 10px;
+  }
+
+  .header-right {
+    text-align: left;
+    margin-top: 10px; 
+  }
+
+  .gallery-container.fullscreen {
+      height: 100vh; 
+  }
+
+  .caption {
+      bottom: 30px; 
+      left: 10px;
+  }
+
+  /* Il video ignora i tocchi */
+  .video-toggle {
+      pointer-events: none;
+      z-index: 1; 
+  }
+
+  /* L'overlay è attivo e cattura i tocchi */
+  .video-overlay {
+      display: block; 
+      z-index: 2; 
+  }
+
+  .clients {
+      flex-direction: column; 
+      gap: 30px; 
+
+      padding-left: 10px;
+      padding-right: 10px;
+      max-width: none; 
+
+      padding-top: 170px; 
+      margin-left: 0;
+      margin-right: 0;
+  }
+
+  /* Assicura che il reset si applichi a tutte le colonne */
+  .clients .colonna1,
+  .clients .colonna2,
+  .clients .colonna3,
+  .clients .colonna4 {
+  .clients .colonna3 {
+      flex-basis: auto; 
+  }
+
+  .clients .colonna4 {
+      text-align: left; 
+      margin-top: 0;
+  }
+}

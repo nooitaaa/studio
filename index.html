@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agnese Pozzobon, Noa Merlini, Martina Valente – Studio</title>
+
+    <link rel="stylesheet" href="style.css"> 
+  </head>
+
+  <body class="homepage">
+
+    <div class="footer1">
+        <div class="header-left">
+            <a href="about.html" class="header-link">
+                Agnese Pozzobon, Noa Merlini, Martina Valente<br>
+                Graphic design and Creative development
+            </a>
+        </div>
+        <div class="header-right">
+            <div id="div_horloge"></div>
+            <div class="header-location">Milan, Italy</div>
+
+            <script>
+              // Script orologio
+              window.onload = function() { horloge('div_horloge'); };
+              function horloge(el) {
+                if (typeof el == "string") { el = document.getElementById(el); }
+                function actualiser() {
+                  var date = new Date();
+                  var str = date.getHours();
+                  str += ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+                  str += ':' + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds();
+                  el.innerHTML = str;
+                }
+                actualiser();
+                setInterval(actualiser, 1000);
+              }
+            </script>
+        </div>
+    </div>
+    
+    <div class="gallery-container fullscreen">
+        <div class="image-wrapper">
+        
+            <div class="image-slide"><img src="images/0_random.jpg" alt="0_random"></div>
+        
+          
+            <div class="image-slide"><img src="images/2_camouflage.jpg" alt="2_camouflage"></div>
+            <div class="image-slide"><img src="images/3_tesi_ma.jpg" alt="3_tesi_ma"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/4_radiospugna.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/5_radiospugna.jpg" alt="5_radiospugna"></div>
+            <div class="image-slide"><img src="images/6_radiospugna.png" alt="6_radiospugna"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/7_gurzbook.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            
+            <div class="image-slide"><img src="images/8_gewolbe.jpg" alt="8_gewolbe"></div>
+            <div class="image-slide"><img src="images/9_radiospugna.jpg" alt="9_radiospugna"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/10_radiospugna.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/11_agfronzoni.jpg" alt="11_agfronzoni"></div>
+            <div class="image-slide"><img src="images/12_radiospugna.jpg" alt="12_radiospugna"></div>
+            <div class="image-slide"><img src="images/13_tesi_ma.jpg" alt="13_tesi_ma"></div>
+            <div class="image-slide"><img src="images/14_tesi_ma.jpg" alt="14_tesi_ma"></div>
+            <div class="image-slide"><img src="images/15_gurzbook.jpg" alt="15_gurzbook"></div>
+            <div class="image-slide"><img src="images/16_bookfair.jpg" alt="16_bookfair"></div>
+
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/17_massivebounce.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/18_radiospugna.jpg" alt="18_radiospugna"></div>
+            <div class="image-slide"><img src="images/19_gewolbe.jpg" alt="19_gewolbe"></div>
+
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/20_isia_openday.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/21_camouflage.jpg" alt="21_camouflage"></div>
+            <div class="image-slide"><img src="images/22_rhizone.jpg" alt="22_rhizone"></div>
+            <div class="image-slide"><img src="images/23_radiospugna.jpg" alt="23_radiospugna"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/24_kwroes.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/25_rhizone.jpg" alt="25_rhizone"></div>
+            
+            <div class="image-slide">
+                <img src="images/26_DDDD.jpg" alt="26_DDDD">
+            </div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/27_deviante.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            
+            <div class="image-slide"><img src="images/28_pratichediposizionamento.jpg" alt="28_pratichediposizionamento"></div>
+            <div class="image-slide"><img src="images/29_softcrash.jpg" alt="29_softcrash"></div>
+            <div class="image-slide"><img src="images/30_volcanoes.jpg" alt="30_volcanoes"></div>
+            <div class="image-slide"><img src="images/31_kwroes.jpg" alt="31_kwroes"></div>
+            <div class="image-slide"><img src="images/32_deconstruck.jpg" alt="32_deconstruck"></div>
+
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/33_isia_openday.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/34_pratichediposizionamento.jpg" alt="34_pratichediposizionamento"></div>
+            <div class="image-slide"><img src="images/35_deviante.jpg" alt="35_deviante"></div>
+            <div class="image-slide"><img src="images/36_radiospugna.jpg" alt="36_radiospugna"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/37_flamenco.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/38_gewolbe.jpg" alt="38_gewolbe"></div>
+            <div class="image-slide"><img src="images/39_DDDD.jpg" alt="39_DDDD"></div>
+            <div class="image-slide"><img src="images/40_deviante.jpg" alt="40_deviante"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/41_radiospugna.MOV" type="video/quicktime">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/42_radioxnoemivola.jpg" alt="42_radioxnoemivola"></div>
+            
+            <div class="image-slide"><img src="images/43_deviante.jpg" alt="43_deviante"></div>
+            <div class="image-slide"><img src="images/44_poster.jpg" alt="44_poster"></div>
+            <div class="image-slide"><img src="images/45_agfronzoni.jpg" alt="45_agfronzoni"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/46_gurzbook.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/47_deviante.jpg" alt="47_deviante"></div>
+            <div class="image-slide"><img src="images/48_radiospugna.jpg" alt="48_radiospugna"></div>
+            <div class="image-slide"><img src="images/49_agfronzoni.jpg" alt="49_agfronzoni"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/50_radiospugna.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/51_camouflage.jpg" alt="51_camouflage"></div>
+            <div class="image-slide"><img src="images/52_kwroes.jpg" alt="52_kwroes"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/53_kwroes.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/54_DDDD.jpg" alt="54_DDDD"></div>
+            <div class="image-slide"><img src="images/55_softcrashxtitivil.jpg" alt="55_softcrashxtitivil"></div>
+            <div class="image-slide"><img src="images/56_rhizone.jpg" alt="56_rhizone"></div>
+            <div class="image-slide"><img src="images/57_tesi_ma.jpg" alt="57_tesi_ma"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/58_radiospugna.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+            
+            <div class="image-slide"><img src="images/59_radiospugna.jpg" alt="59_radiospugna"></div>
+            <div class="image-slide"><img src="images/60_DDDD.jpg" alt="60_DDDD"></div>
+            <div class="image-slide"><img src="images/61_softcrash.jpg" alt="61_softcrash"></div>
+            
+            <div class="image-slide">
+                <video class="video-toggle" autoplay loop muted playsinline>
+                    <source src="images/62_kvroes.mp4" type="video/mp4">
+                    Il tuo browser non supporta i video.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+
+            <div class="image-slide"><img src="images/63_random.jpg" alt="63_random"></div>
+
+        </div>
+    </div>
+    
+    
+    <script>
+        const gallery = document.querySelector('.gallery-container');
+        const videos = document.querySelectorAll('.video-toggle');
+        const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+        function unlockVideos() {
+            videos.forEach(video => {
+                if (video.paused) {
+                    video.play();
+                }
+            });
+            window.removeEventListener('touchstart', unlockVideos, { capture: true });
+            window.removeEventListener('scroll', unlockVideos, { capture: true });
+        }
+
+        videos.forEach(video => {
+            video.play().catch(error => {
+                if (isMobile) {
+                    window.addEventListener('touchstart', unlockVideos, { once: true, capture: true });
+                    window.addEventListener('scroll', unlockVideos, { once: true, capture: true });
+                }
+            });
+
+            if (!isMobile) {
+                video.addEventListener('click', function() {
+                    if (video.paused) { 
+                        video.play();
+                        video.muted = true; 
+                    } else {
+                        video.muted = !video.muted;
+                    }
+                });
+            }
+        });
+    </script>
+    
+  </body>
+</html>
