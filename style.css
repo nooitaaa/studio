@@ -25,8 +25,9 @@ body {
 }
 
 body.homepage {
-    overflow: hidden;
-    padding-top: 0; 
+  /* overflow: hidden; */ /* MODIFICA: Permette lo scorrimento */
+  overflow-y: auto;
+  padding-top: 0; 
 }
 
 ::selection {
@@ -55,19 +56,23 @@ body.homepage {
   padding: 8px 10px 10px 10px; 
   margin: 0; 
 
-  background-color: transparent; 
+  background-color: white; /* MODIFICA: Sfondo bianco */
   z-index: 1000; 
-  color: white; 
-  mix-blend-mode: difference; 
+  color: black; /* MODIFICA: Testo nero */
+  /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
 
   font-weight: normal;
   font-size: inherit;
   font-family: inherit;
+  
+  /* Aggiunto per separazione */
+  border-bottom: 1px solid black; 
+  box-sizing: border-box; /* Assicura che il padding sia incluso */
 }
 
 .footer1 a {
-    color: white;
-    mix-blend-mode: difference;
+    color: black; /* MODIFICA: Testo nero */
+    /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
     text-decoration: none;
 }
 
@@ -100,8 +105,13 @@ body.homepage {
 
 .gallery-container.fullscreen {
   width: 100vw; 
-  height: 100vh; 
+  /* height: 100vh; */ /* MODIFICA: Ridotta a 80% */
+  height: 80vh;
   margin: 0;
+  
+  /* MODIFICA: Aggiunto padding per l'header fisso */
+  padding-top: 70px; /* Regola questo valore se l'header è più alto */
+  box-sizing: border-box; /* Importante per il calcolo dell'altezza */
 }
 
 .image-wrapper {
@@ -179,6 +189,55 @@ body.homepage {
 }
 
 /* ------------------------------------- */
+/* ⬇️ NUOVE REGOLE INDICE ⬇️ */
+/* ------------------------------------- */
+
+.index-section {
+  padding: 40px 20px; /* Spazio sopra e sotto l'indice */
+  text-align: left;
+  width: 100%;
+  max-width: 1000px; /* Larghezza massima dell'indice */
+  margin: 0 auto; /* Centra l'indice */
+  box-sizing: border-box; 
+  color: black; /* Assicura testo nero */
+}
+
+.index-section h2 {
+  font-size: inherit; /* Stessa dimensione del body */
+  line-height: inherit;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid black; /* Linea separatrice */
+}
+
+.index-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  /* Colonne per desktop */
+  columns: 2 200px; /* Crea 2 colonne (o più se c'è spazio) */
+  -webkit-columns: 2 200px;
+  -moz-columns: 2 200px;
+  column-gap: 30px;
+}
+
+.index-list li {
+  margin-bottom: 8px; /* Spazio tra gli item */
+  /* text-decoration: underline; */ /* Opzionale: se vuoi sottolineare */
+}
+
+.index-list li a {
+    color: black;
+    text-decoration: none;
+}
+.index-list li a:hover {
+    text-decoration: underline; /* Sottolinea solo in hover */
+}
+
+
+/* ------------------------------------- */
 /* 👥 REGOLE SEZIONE INFO (Pagina about.html) */
 /* ------------------------------------- */
 
@@ -196,22 +255,19 @@ body.homepage {
   display: flex; 
   justify-content: space-between; 
   gap: 55px; /* Spazio tra colonne */
-  gap: 55px; 
   max-width: none; 
 
-  color: white; 
-  mix-blend-mode: difference;
+  color: black; /* MODIFICA: Testo nero */
+  /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
 }
 
 .clients a {
-    color: white;
-    mix-blend-mode: difference;
+    color: black; /* MODIFICA: Testo nero */
+    /* mix-blend-mode: difference; */ /* MODIFICA: Rimosso */
 }
 
-/* ✨ MODIFICA: Ripristinate 4 colonne (25%) */
 /* ✨ MODIFICA: Tre colonne di larghezza uguale (33.33%) */
 .clients > div {
-    flex-basis: 25%; 
     flex-basis: 33.33%; 
     flex-grow: 1;
     flex-shrink: 1;
@@ -246,6 +302,7 @@ body.homepage {
     flex-direction: column; 
     align-items: flex-start;
     padding: 8px 10px;
+    height: auto; /* Altezza automatica */
   }
 
   .header-right {
@@ -254,7 +311,10 @@ body.homepage {
   }
 
   .gallery-container.fullscreen {
-      height: 100vh; 
+      /* height: 100vh; */ /* MODIFICA */
+      height: 80vh;
+      /* MODIFICA: Più spazio per header mobile (che è più alto) */
+      padding-top: 90px; 
   }
 
   .caption {
@@ -273,7 +333,14 @@ body.homepage {
       display: block; 
       z-index: 2; 
   }
-
+  
+  /* ⬇️ NUOVE REGOLE INDICE (Mobile) ⬇️ */
+  .index-list {
+    columns: 1; /* Una sola colonna su mobile */
+    -webkit-columns: 1;
+    -moz-columns: 1;
+  }
+  
   .clients {
       flex-direction: column; 
       gap: 30px; 
@@ -282,19 +349,20 @@ body.homepage {
       padding-right: 10px;
       max-width: none; 
 
-      padding-top: 170px; 
+      padding-top: 170px; /* Aumentato per l'header mobile più alto */
       margin-left: 0;
       margin-right: 0;
   }
 
+  /* ⬇️ CORREZIONE SINTASSI APPLICATA QUI ⬇️ */
   /* Assicura che il reset si applichi a tutte le colonne */
   .clients .colonna1,
   .clients .colonna2,
   .clients .colonna3,
   .clients .colonna4 {
-  .clients .colonna3 {
-      flex-basis: auto; 
+      flex-basis: auto; /* CORREZIONE: Era scritto male */
   }
+  /* ⬆️ FINE CORREZIONE ⬆️ */
 
   .clients .colonna4 {
       text-align: left; 
