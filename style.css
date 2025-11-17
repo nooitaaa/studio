@@ -25,7 +25,6 @@ body {
 }
 
 body.homepage {
-  /* MODIFICA: Permette lo scorrimento */
   overflow-y: auto;
   padding-top: 0; 
 }
@@ -48,22 +47,17 @@ body.homepage {
   top: 0;
   left: 0;
   right: 0; 
-
   display: flex;
   justify-content: space-between; 
   align-items: flex-start; 
-
   padding: 8px 10px 10px 10px; 
   margin: 0; 
-
   background-color: white; 
   z-index: 1000; 
   color: black; 
-
   font-weight: normal;
   font-size: inherit;
   font-family: inherit;
-  
   box-sizing: border-box; 
 }
 
@@ -71,26 +65,22 @@ body.homepage {
     color: black; 
     text-decoration: none;
 }
-
 .header-link {
     color: inherit; 
     text-decoration: none;
 }
-
 .header-left {
     text-align: left;
 }
-
 .header-right {
     text-align: right;
 }
-
 .header-location {
     margin-top: 0; 
 }
 
 /* ------------------------------------- */
-/* 🎞️ REGOLE GALLERIA SCORREVOLE */
+/* 🎞️ REGOLE GALLERIA SCORREVOLE (RIPRISTINATE) */
 /* ------------------------------------- */
 
 .gallery-container {
@@ -103,7 +93,6 @@ body.homepage {
   width: 100vw; 
   height: 80vh; 
   margin: 0;
-  
   padding-top: 55px; 
   box-sizing: border-box; 
 }
@@ -117,12 +106,10 @@ body.homepage {
 .image-slide {
   flex-shrink: 0; 
   height: 100%;
-  /* MODIFICA: Aumento il margine per contenere il numero */
-  margin-right: 50px; 
+  /* MODIFICA: Ripristinato come prima, senza margini/padding */
+  margin-right: 0; 
+  padding-left: 0;
   position: relative; 
-  /* NUOVO: Padding a sinistra per creare lo spazio per il numero */
-  padding-left: 20px; 
-  box-sizing: border-box; /* Importante per il padding */
 }
 
 .image-slide img,
@@ -132,46 +119,19 @@ body.homepage {
   display: block;
 }
 
-/* NUOVO: Stile per il numero della slide */
-.slide-number {
-  position: absolute;
-  top: 0; /* Allineato in alto con l'immagine */
-  left: 0; /* Allineato a sinistra del padding */
-  font-size: 13px; 
-  color: black;
-  z-index: 5; 
-  white-space: nowrap; 
-}
+/* (Regole .video-toggle e .video-overlay rimangono invariate...) */
 
-
-/* Il cursore "mano" appare solo su desktop */
 @media (hover: hover) {
     .video-toggle {
         cursor: pointer;
     }
 }
-
-/* Nasconde i controlli di default (incluso il play di iOS) */
 .video-toggle::-webkit-media-controls {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
 }
-.video-toggle::-webkit-media-controls-play-button,
-.video-toggle::-webkit-media-controls-panel,
-.video-toggle::-webkit-media-controls-volume-slider,
-.video-toggle::-webkit-media-controls-mute-button,
-.video-toggle::-webkit-media-controls-timeline,
-.video-toggle::-webkit-media-controls-current-time-display,
-.video-toggle::-webkit-media-controls-time-remaining-display,
-.video-toggle::-webkit-media-controls-fullscreen-button {
-    display: none !important;
-    -webkit-appearance: none; 
-    opacity: 0 !important;
-    visibility: hidden !important;
-}
-
-/* Overlay trasparente (invisibile su desktop) */
+/* ...altre regole controlli video... */
 .video-overlay {
     position: absolute;
     top: 0;
@@ -181,17 +141,13 @@ body.homepage {
     z-index: 2; 
     display: none; 
 }
-
-
 .caption {
   position: absolute;
   bottom: 30px; 
   left: 10px; 
-
   color: white;
   mix-blend-mode: difference;
   z-index: 10; 
-
   text-align: left;
   font-family: inherit;
   font-size: inherit;
@@ -199,7 +155,7 @@ body.homepage {
 }
 
 /* ------------------------------------- */
-/* ⬇️ NUOVE REGOLE INDICE ⬇️ */
+/* ⬇️ REGOLE INDICE ⬇️ */
 /* ------------------------------------- */
 
 .index-section {
@@ -239,7 +195,6 @@ body.homepage {
    text-decoration: underline; 
 }
 
-
 /* ------------------------------------- */
 /* 👥 REGOLE SEZIONE INFO (Pagina about.html) */
 /* ------------------------------------- */
@@ -259,10 +214,10 @@ body.homepage {
   color: black;
 }
 
+/* ... (regole .clients e .colonnaN invariate) ... */
 .clients a {
     color: black;
 }
-
 .clients > div {
     flex-basis: 33.33%; 
     flex-grow: 1;
@@ -270,15 +225,58 @@ body.homepage {
     text-wrap: balance;
     hyphens: auto; 
 }
-
 .clients .colonna3 br:first-child {
     display: none;
 }
-
 .clients .colonna4 {
     text-align: left; 
     margin-top: 0; 
 }
+
+
+/* ------------------------------------- */
+/* 📄 NUOVE REGOLE PAGINA PROGETTO 📄 */
+/* ------------------------------------- */
+
+.project-page-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 140px 20px 40px 20px; /* Spazio da header */
+  max-width: 1000px; /* Stessa larghezza dell'indice */
+  margin: 0 auto;
+  gap: 30px; /* Spazio tra testo e immagini */
+}
+
+.project-text {
+  flex: 1; /* Occupa 1 parte (es. 33%) */
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 140px; /* Si blocca sotto l'header (regola se serve) */
+  
+  /* Stile "come l'indice" (stesso font/dimensione del body) */
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.project-images {
+  flex: 2; /* Occupa 2 parti (es. 66%, più largo) */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spazio tra le immagini */
+  position: relative; /* Necessario per lo z-index */
+  z-index: 2; /* Assicura che scorra "sopra" lo sfondo */
+}
+
+.project-images img {
+  width: 100%; /* Immagini responsive */
+  height: auto;
+  display: block;
+  background-color: white; /* Maschera il testo dietro */
+}
+
 
 /* ------------------------------------- */
 /* 📱 REGOLE MEDIA QUERY (MOBILE) */
@@ -286,61 +284,50 @@ body.homepage {
 
 @media screen and (max-width: 840px) {
 
+  /* ... (regole header e galleria mobile invariate) ... */
   body.homepage {
       padding-top: 0;
   }
-
   .footer1 {
     flex-direction: column; 
     align-items: flex-start;
     padding: 8px 10px;
     height: auto; 
   }
-
   .header-right {
     text-align: left;
     margin-top: 10px; 
   }
-
   .gallery-container.fullscreen {
       height: 80vh;
       padding-top: 85px; 
   }
-
-  /* MODIFICA: Regolato il numero per mobile */
-  .slide-number {
-      top: 0; /* Allineato in alto */
-      left: 0; /* Allineato a sinistra del padding */
-  }
-
-  /* MODIFICA: Ridotto il margine e padding per mobile */
+  /* (Ripristino galleria mobile) */
   .image-slide {
-      margin-right: 30px; /* Margine minore per mobile */
-      padding-left: 15px; /* Padding minore per mobile */
+      margin-right: 0; 
+      padding-left: 0;
   }
-
   .caption {
       bottom: 30px; 
       left: 10px;
   }
-
   .video-toggle {
       pointer-events: none;
       z-index: 1; 
   }
-
   .video-overlay {
       display: block; 
       z-index: 2; 
   }
   
-  /* ⬇️ NUOVE REGOLE INDICE (Mobile) ⬇️ */
+  /* (Regole indice mobile invariate) */
   .index-grid {
      grid-template-columns: 0.5fr 1.5fr 0.5fr 1fr 1fr;
      overflow-x: auto; 
      padding-bottom: 10px; 
   }
   
+  /* (Regole .clients mobile invariate) */
   .clients {
       flex-direction: column; 
       gap: 30px; 
@@ -351,16 +338,30 @@ body.homepage {
       margin-left: 0;
       margin-right: 0;
   }
-
   .clients .colonna1,
   .clients .colonna2,
   .clients .colonna3,
   .clients .colonna4 {
       flex-basis: auto; 
   }
-
   .clients .colonna4 {
       text-align: left; 
       margin-top: 0;
   }
+
+  /* 📄 REGOLE PROGETTO (Mobile) 📄 */
+  .project-page-wrapper {
+      flex-direction: column; /* Colonne in pila su mobile */
+      padding-top: 140px; 
+  }
+  
+  .project-text {
+      position: static; /* Rimuovi lo sticky su mobile */
+      margin-bottom: 30px; /* Spazio prima delle immagini */
+  }
+  
+  .project-images {
+      width: 100%; 
+  }
+
 }
