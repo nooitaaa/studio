@@ -64,7 +64,6 @@ body.homepage {
   font-size: inherit;
   font-family: inherit;
   
-  /* MODIFICA: Rimosso border-bottom */
   box-sizing: border-box; 
 }
 
@@ -105,7 +104,6 @@ body.homepage {
   height: 80vh; 
   margin: 0;
   
-  /* MODIFICA: Ridotto padding-top per avvicinare all'header */
   padding-top: 55px; 
   box-sizing: border-box; 
 }
@@ -119,7 +117,8 @@ body.homepage {
 .image-slide {
   flex-shrink: 0; 
   height: 100%;
-  margin-right: 0; 
+  /* MODIFICA: Margine tra le immagini */
+  margin-right: 30px; /* Spazio tra le slide */
   position: relative; 
 }
 
@@ -129,6 +128,18 @@ body.homepage {
   width: auto; 
   display: block;
 }
+
+/* NUOVO: Stile per il numero della slide */
+.slide-number {
+  position: absolute;
+  top: -20px; /* Sposta il numero sopra l'immagine, nel margine */
+  left: -20px; /* Sposta il numero a sinistra dell'immagine, nel margine */
+  font-size: 13px; /* Stessa dimensione del body per coerenza */
+  color: black;
+  z-index: 5; /* Assicura che sia sopra l'immagine */
+  white-space: nowrap; /* Evita che il numero vada a capo */
+}
+
 
 /* Il cursore "mano" appare solo su desktop */
 @media (hover: hover) {
@@ -189,7 +200,6 @@ body.homepage {
 /* ------------------------------------- */
 
 .index-section {
-  /* MODIFICA: Ridotto padding-top per avvicinare alla galleria */
   padding: 15px 20px 40px 20px; 
   text-align: left;
   width: 100%;
@@ -201,22 +211,17 @@ body.homepage {
 
 .index-grid {
   display: grid;
-  /* 5 colonne: N., Titolo, Anno, Categoria, Cliente */
   grid-template-columns: 0.6fr 1.5fr 0.6fr 1fr 1fr;
-  /* MODIFICA: Ridotto row-gap (interlinea) */
   gap: 4px 15px; 
   width: 100%;
-  /* MODIFICA: Rimosso border-top */
   padding-top: 10px;
 }
 
 .index-header {
   font-weight: normal; 
   padding-bottom: 5px;
-  /* MODIFICA: Rimosso border-bottom */
 }
 
-/* QUESTA È LA RIGA CLICCABILE (IL LINK <a>) */
 .index-row {
   display: contents; 
   text-decoration: none;
@@ -224,11 +229,9 @@ body.homepage {
 }
 
 .index-item {
-  /* MODIFICA: Rimosso padding-bottom per compattare */
   text-decoration: none; 
 }
 
-/* Effetto al passaggio del mouse sull'intera riga */
 .index-row:hover .index-item {
    text-decoration: underline; 
 }
@@ -298,8 +301,13 @@ body.homepage {
 
   .gallery-container.fullscreen {
       height: 80vh;
-      /* MODIFICA: Ridotto padding-top mobile */
       padding-top: 85px; 
+  }
+
+  /* MODIFICA: Regolato il numero per mobile */
+  .slide-number {
+      top: -15px; /* Ancora più in alto per mobile */
+      left: -10px; /* Ancora più a sinistra per mobile */
   }
 
   .caption {
@@ -330,20 +338,17 @@ body.homepage {
       padding-left: 10px;
       padding-right: 10px;
       max-width: none; 
-      /* MODIFICA: Ridotto padding-top per header mobile */
       padding-top: 140px; 
       margin-left: 0;
       margin-right: 0;
   }
 
-  /* ⬇️ CORREZIONE SINTASSI APPLICATA QUI ⬇️ */
   .clients .colonna1,
   .clients .colonna2,
   .clients .colonna3,
   .clients .colonna4 {
       flex-basis: auto; 
   }
-  /* ⬆️ FINE CORREZIONE ⬆️ */
 
   .clients .colonna4 {
       text-align: left; 
