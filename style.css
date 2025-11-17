@@ -106,7 +106,6 @@ body.homepage {
 .image-slide {
   flex-shrink: 0; 
   height: 100%;
-  /* MODIFICA: Ripristinato come prima, senza margini/padding */
   margin-right: 0; 
   padding-left: 0;
   position: relative; 
@@ -118,8 +117,6 @@ body.homepage {
   width: auto; 
   display: block;
 }
-
-/* (Regole .video-toggle e .video-overlay rimangono invariate...) */
 
 @media (hover: hover) {
     .video-toggle {
@@ -214,7 +211,6 @@ body.homepage {
   color: black;
 }
 
-/* ... (regole .clients e .colonnaN invariate) ... */
 .clients a {
     color: black;
 }
@@ -235,26 +231,30 @@ body.homepage {
 
 
 /* ------------------------------------- */
-/* 📄 NUOVE REGOLE PAGINA PROGETTO 📄 */
+/* 📄 NUOVE REGOLE PAGINA PROGETTO (SOVRAPPOSIZIONE) 📄 */
 /* ------------------------------------- */
 
-.project-page-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 140px 20px 40px 20px; /* Spazio da header */
+/* Usiamo questo wrapper per centrare il contenuto */
+.project-content-wrapper {
   max-width: 1000px; /* Stessa larghezza dell'indice */
   margin: 0 auto;
-  gap: 30px; /* Spazio tra testo e immagini */
+  padding: 0 20px; /* Stesso padding dell'indice */
+  box-sizing: border-box;
 }
 
 .project-text {
-  flex: 1; /* Occupa 1 parte (es. 33%) */
-  position: -webkit-sticky; /* Safari */
+  /* Questo è il blocco di testo che si attacca in alto */
+  position: -webkit-sticky;
   position: sticky;
-  top: 140px; /* Si blocca sotto l'header (regola se serve) */
+  top: 55px; /* Altezza dell'header (regola se necessario) */
   
-  /* Stile "come l'indice" (stesso font/dimensione del body) */
+  padding-top: 20px; /* Spazio dal'header */
+  padding-bottom: 20px; /* Spazio sotto il testo */
+  
+  background-color: white; /* FONDAMENTALE: copre le immagini sotto */
+  z-index: 10; /* Sta sopra le immagini */
+  
+  /* Stile "come l'indice" */
   text-align: left;
   font-family: inherit;
   font-size: inherit;
@@ -262,19 +262,23 @@ body.homepage {
 }
 
 .project-images {
-  flex: 2; /* Occupa 2 parti (es. 66%, più largo) */
+  /* Questo è il contenitore per le immagini */
+  position: relative;
+  z-index: 5; /* Sta sotto il testo */
+  
+  /* Creiamo spazio per le immagini */
   display: flex;
   flex-direction: column;
   gap: 15px; /* Spazio tra le immagini */
-  position: relative; /* Necessario per lo z-index */
-  z-index: 2; /* Assicura che scorra "sopra" lo sfondo */
+  
+  /* Spazio finale in fondo alla pagina */
+  padding-bottom: 50px; 
 }
 
 .project-images img {
-  width: 100%; /* Immagini responsive */
+  width: 100%; 
   height: auto;
   display: block;
-  background-color: white; /* Maschera il testo dietro */
 }
 
 
@@ -302,7 +306,6 @@ body.homepage {
       height: 80vh;
       padding-top: 85px; 
   }
-  /* (Ripristino galleria mobile) */
   .image-slide {
       margin-right: 0; 
       padding-left: 0;
@@ -350,18 +353,9 @@ body.homepage {
   }
 
   /* 📄 REGOLE PROGETTO (Mobile) 📄 */
-  .project-page-wrapper {
-      flex-direction: column; /* Colonne in pila su mobile */
-      padding-top: 140px; 
-  }
-  
   .project-text {
-      position: static; /* Rimuovi lo sticky su mobile */
-      margin-bottom: 30px; /* Spazio prima delle immagini */
-  }
-  
-  .project-images {
-      width: 100%; 
+      /* Su mobile, l'header fisso è più alto */
+      top: 85px; 
   }
 
 }
