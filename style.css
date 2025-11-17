@@ -278,7 +278,7 @@ body.homepage {
 }
 
 .project-images img {
-  width: 100%; /* Immagini a tutta larghezza (della colonna) */
+  width: 60%; /* Immagini a tutta larghezza (della colonna) */
   height: auto;
   display: block;
 }
