@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Agnese Pozzobon, Noa Merlini, Martina Valente – Studio</title>
+    <title> Noa Merlini </title>
 
     <link rel="stylesheet" href="style.css"> 
   </head>
@@ -13,30 +13,15 @@
     <div class="footer1">
         <div class="header-left">
             <a href="about.html" class="header-link">
-                Agnese Pozzobon, Noa Merlini, Martina Valente<br>
-                Graphic design and Creative development
+                Noa Merlini<br>
+                Concept research and Creative development
             </a>
         </div>
         <div class="header-right">
             <div id="div_horloge"></div>
             <div class="header-location">Milan, Italy</div>
 
-            <script>
-              // Script orologio
-              window.onload = function() { horloge('div_horloge'); };
-              function horloge(el) {
-                if (typeof el == "string") { el = document.getElementById(el); }
-                function actualiser() {
-                  var date = new Date();
-                  var str = date.getHours();
-                  str += ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
-                  str += ':' + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds();
-                  el.innerHTML = str;
-                }
-                actualiser();
-                setInterval(actualiser, 1000);
-              }
-            </script>
+
         </div>
     </div>
     
