@@ -32,12 +32,12 @@
     background-color: white;
     width: 100vw;
     height: 100vh;
-    padding-top: 55px;
+    padding-top: 0px;
   }
 
   .slide {
     position: absolute;
-    top: 55px; left: 0; right: 0; bottom: 0;
+    top: 0px; left: 0; right: 0; bottom: 0;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -55,13 +55,13 @@
     align-items: center;
     justify-content: center;
     font-family: sans-serif;
-    font-size: 14px;
+    font-size: 10px;
   }
   /* orizzontale: largo, poco alto -> vuoto sopra/sotto */
-  .ph.landscape { width: 80%; height: 45%; background:#666; }
+  .ph.landscape { width: 100%; height: 45%; background:#666; }
   /* verticale: stretto, alto -> vuoto ai lati */
-  .ph.portrait { width: 35%; height: 90%; background:#333; }
-  .ph.square { width: 60%; height: 60%; background:#8a8a8a; }
+  .ph.portrait { width: 35%; height: 100%; background:#333; }
+  .ph.square { width: 60%; height: 100%; background:#8a8a8a; }
 
   .slideshow-caption {
     position: fixed;
@@ -97,9 +97,8 @@
 
   <div class="slideshow-container">
     <div class="slide"><img src="images/0_random.jpg" alt="0_random"></div>
-    <div class="slide"><div class="images/2_camouflage.jpg">verticale</div></div>
-    <div class="slide"><div class="images/3_tesi_ma.jpg">quadrata</div></div>
-    <div class="slide"><div class="ph landscape">orizzontale</div></div>
+    <div class="slide"><img src="images/2_camouflage.jpg" alt="2_camouflage"></div>
+    <div class="slide"><img src="images/3_tesi_ma.jpg" alt="3_tesi_ma"></div>
     <div class="slide"><div class="ph portrait">verticale</div></div>
 
     <div class="slideshow-caption">Noa Merlini<br>Concept research and Creative development</div>
@@ -122,7 +121,7 @@
     setTimeout(() => {
       slide.classList.remove('active');
       setTimeout(() => {
-        current = (current + 1) % slides.length;
+        current = (current + 3) % slides.length;
         run();
       }, FADE_MS + GAP_MS);
     }, HOLD_MS);
