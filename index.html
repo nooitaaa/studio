@@ -9,79 +9,157 @@
 
   <body class="homepage">
 
-    <div class="footer1">
-        <div class="header-right">
-            <div id="div_horloge"></div>
-        </div>
-    </div>
+    <div class="slideshow-container fullscreen" id="slideshow"></div>
 
-    <div class="slideshow-container fullscreen">
-
-        <div class="slide"><img src="images/0_random.jpg" alt="0_random"></div>
-        <div class="slide"><img src="images/2_camouflage.jpg" alt="2_camouflage"></div>
-        <div class="slide"><img src="images/3_tesi_ma.jpg" alt="3_tesi_ma"></div>
-
-        <div class="slide">
-            <video class="video-toggle" loop muted playsinline>
-                <source src="images/4_radiospugna.mp4" type="video/mp4">
-                Il tuo browser non supporta i video.
-            </video>
-        </div>
-
-        <div class="slide"><img src="images/5_radiospugna.jpg" alt="5_radiospugna"></div>
-        <div class="slide"><img src="images/6_radiospugna.jpeg" alt="6_radiospugna"></div>
-
-        <a href="about.html" class="slideshow-caption">
-            Noa Merlini<br>
-            Concept research and Creative development
-        </a>
-
-    </div>
+    <a href="about.html" class="slideshow-caption">
+        Noa Merlini<br>
+        Concept research and Creative development
+    </a>
 
     <script>
-        // --- Orologio in header ---
-        function tickClock() {
-            const el = document.getElementById('div_horloge');
-            if (!el) return;
-            const now = new Date();
-            const pad = n => String(n).padStart(2, '0');
-            el.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-        }
-        tickClock();
-        setInterval(tickClock, 1000);
+        // --- Elenco dei file (aggiungine altri qui quando servono) ---
+        const MEDIA_LIST = [
+            { type: 'image', src: 'images/0_random.jpg', title: 'Random' },
+            { type: 'image', src: 'images/2_camouflage.jpg', title: 'Camouflage' },
+            { type: 'image', src: 'images/3_tesi_ma.jpg', title: 'Tesi MA' },
+            { type: 'video', src: 'images/4_radiospugna.mp4', title: 'Radio Spugna' },
+            { type: 'image', src: 'images/5_radiospugna.jpg', title: 'Radio Spugna' },
+            { type: 'image', src: 'images/6_radiospugna.jpeg', title: 'Radio Spugna' },
+        ];
 
-        // --- SLIDESHOW: un'immagine/video alla volta, dissolvenza, vuoto tra le slide ---
+        const DESKTOP_BREAKPOINT = 841; // combacia con la media query mobile (max-width: 840px)
+        const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
+        if (isDesktop) document.body.classList.add('desktop-mode');
+        else document.body.classList.add('mobile-mode');
+
+        // Rileva l'orientamento reale di un'immagine o di un video
+        function detectOrientation(item) {
+            return new Promise(resolve => {
+                if (item.type === 'image') {
+                    const img = new Image();
+                    img.onload = () => resolve(img.naturalWidth >= img.naturalHeight ? 'landscape' : 'portrait');
+                    img.onerror = () => resolve('landscape');
+                    img.src = item.src;
+                } else {
+                    const video = document.createElement('video');
+                    video.preload = 'metadata';
+                    video.onloadedmetadata = () => resolve(video.videoWidth >= video.videoHeight ? 'landscape' : 'portrait');
+                    video.onerror = () => resolve('landscape');
+                    video.src = item.src;
+                }
+            });
+        }
+
+        function createMediaElement(item) {
+            let el;
+            if (item.type === 'image') {
+                el = document.createElement('img');
+                el.src = item.src;
+                el.alt = item.src.split('/').pop();
+            } else {
+                el = document.createElement('video');
+                el.loop = true;
+                el.muted = true;
+                el.playsInline = true;
+                el.classList.add('video-toggle');
+                const source = document.createElement('source');
+                source.src = item.src;
+                source.type = 'video/mp4';
+                el.appendChild(source);
+            }
+            el.classList.add('slide-media');
+            return el;
+        }
+
+        function createCaptionElement(item) {
+            const cap = document.createElement('div');
+            cap.className = 'slide-caption';
+            cap.textContent = item.title || '';
+            return cap;
+        }
+
+        // Costruisce i "gruppi" di slide: su desktop, coppie di verticali consecutive; il resto da solo
+        function buildGroups(items) {
+            if (!isDesktop) {
+                return items.map(item => [item]); // mobile: sempre una slide per file, invariato
+            }
+            const groups = [];
+            let i = 0;
+            while (i < items.length) {
+                const current = items[i];
+                const next = items[i + 1];
+                if (current.orientation === 'portrait' && next && next.orientation === 'portrait') {
+                    groups.push([current, next]);
+                    i += 2;
+                } else {
+                    groups.push([current]);
+                    i += 1;
+                }
+            }
+            return groups;
+        }
+
+        function renderSlides(groups) {
+            const container = document.getElementById('slideshow');
+            container.innerHTML = '';
+            groups.forEach(group => {
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+
+                if (group.length === 2) {
+                    const pair = document.createElement('div');
+                    pair.className = 'slide-pair';
+                    group.forEach(item => {
+                        const half = document.createElement('div');
+                        half.className = 'pair-half';
+                        half.appendChild(createMediaElement(item));
+                        half.appendChild(createCaptionElement(item));
+                        pair.appendChild(half);
+                    });
+                    slide.appendChild(pair);
+                } else {
+                    slide.appendChild(createMediaElement(group[0]));
+                    slide.appendChild(createCaptionElement(group[0]));
+                }
+
+                container.appendChild(slide);
+            });
+        }
+
+        // --- SLIDESHOW: dissolvenza, vuoto tra le slide ---
         const HOLD_MS = 3000;   // durata di ogni slide visibile
         const FADE_MS = 800;    // durata della dissolvenza (combacia col CSS transition)
         const GAP_MS = 1000;    // durata del "vuoto" bianco tra una slide e l'altra
 
-        const slides = Array.from(document.querySelectorAll('.slideshow-container .slide'));
         let current = 0;
+        let slides = [];
 
-        function getMedia(slide) {
-            return slide.querySelector('img, video');
+        function getMediaEls(slide) {
+            return Array.from(slide.querySelectorAll('.slide-media'));
         }
-        function playIfVideo(slide) {
-            const media = getMedia(slide);
-            if (media && media.tagName === 'VIDEO') {
-                media.currentTime = 0;
-                media.play().catch(() => {});
-            }
+        function playVideos(slide) {
+            getMediaEls(slide).forEach(media => {
+                if (media.tagName === 'VIDEO') {
+                    media.currentTime = 0;
+                    media.play().catch(() => {});
+                }
+            });
         }
-        function pauseIfVideo(slide) {
-            const media = getMedia(slide);
-            if (media && media.tagName === 'VIDEO') media.pause();
+        function pauseVideos(slide) {
+            getMediaEls(slide).forEach(media => {
+                if (media.tagName === 'VIDEO') media.pause();
+            });
         }
 
         function runSlideshow() {
             if (slides.length === 0) return;
             const slide = slides[current];
             slide.classList.add('active');
-            playIfVideo(slide);
+            playVideos(slide);
 
             setTimeout(() => {
                 slide.classList.remove('active');
-                pauseIfVideo(slide);
+                pauseVideos(slide);
 
                 setTimeout(() => {
                     current = (current + 1) % slides.length;
@@ -89,12 +167,11 @@
                 }, FADE_MS + GAP_MS);
             }, HOLD_MS);
         }
-        if (slides.length > 0) runSlideshow();
 
-        // Click su video attivo: play/pausa + mute toggle (desktop)
-        const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-        document.querySelectorAll('.video-toggle').forEach(video => {
-            if (!isMobile) {
+        function setupVideoClickToggle() {
+            const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+            if (isTouch) return;
+            document.querySelectorAll('.video-toggle').forEach(video => {
                 video.addEventListener('click', function () {
                     if (video.paused) {
                         video.play();
@@ -103,7 +180,18 @@
                         video.muted = !video.muted;
                     }
                 });
-            }
+            });
+        }
+
+        // --- Avvio: rileva l'orientamento di tutti i file, poi costruisce e avvia lo slideshow ---
+        Promise.all(MEDIA_LIST.map(item =>
+            detectOrientation(item).then(orientation => ({ ...item, orientation }))
+        )).then(itemsWithOrientation => {
+            const groups = buildGroups(itemsWithOrientation);
+            renderSlides(groups);
+            slides = Array.from(document.querySelectorAll('.slideshow-container .slide'));
+            setupVideoClickToggle();
+            runSlideshow();
         });
     </script>
 
