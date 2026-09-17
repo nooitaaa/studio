@@ -96,7 +96,7 @@ body.homepage #div_horloge {
   bottom: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.8s ease;
+  transition: opacity 1.2s ease;
   overflow: hidden;
 }
 .slide.active {
@@ -149,8 +149,8 @@ body.desktop-mode .slide-media {
   bottom: 10px;
   left: 10px;
   margin: 0;
-  color: white;
-  mix-blend-mode: difference;
+  color: black;
+  mix-blend-mode: none;
   font-family: "Times New Roman", Times, serif;
   font-size: 15px;
   line-height: 1.0;
