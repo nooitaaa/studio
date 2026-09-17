@@ -44,12 +44,11 @@
             { type: 'image', src: 'images/IMG_4480.png', title: 'Urban Scene' },
         ];
 
-        const DESKTOP_BREAKPOINT = 841; // combacia con la media query mobile (max-width: 840px)
+        const DESKTOP_BREAKPOINT = 841;
         const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
         if (isDesktop) document.body.classList.add('desktop-mode');
         else document.body.classList.add('mobile-mode');
 
-        // Rileva l'orientamento (modificata per non bloccarsi sui video)
         function detectOrientation(item) {
             return new Promise(resolve => {
                 if (item.type === 'image') {
@@ -59,8 +58,8 @@
                     img.src = item.src;
                 } else {
                     const video = document.createElement('video');
-                    video.muted = true;       // <-- Necessario su mobile per non bloccarsi
-                    video.playsInline = true; // <-- Necessario su mobile
+                    video.muted = true;       
+                    video.playsInline = true; 
                     video.preload = 'metadata';
                     video.onloadedmetadata = () => resolve(video.videoWidth >= video.videoHeight ? 'landscape' : 'portrait');
                     video.onerror = () => resolve('landscape');
@@ -75,7 +74,7 @@
                 el = document.createElement('img');
                 el.src = item.src;
                 el.alt = item.title || 'Portfolio image';
-                el.loading = 'lazy'; // <-- Aiuta il browser a scaricarle "man mano"
+                el.loading = 'lazy'; 
             } else {
                 el = document.createElement('video');
                 el.loop = true;
@@ -98,7 +97,6 @@
             return cap;
         }
 
-        // Costruisce i "gruppi" di slide
         function buildGroups(items) {
             if (!isDesktop) {
                 return items.map(item => [item]); 
@@ -146,10 +144,9 @@
             });
         }
 
-        // --- SLIDESHOW TIMING ---
-        const HOLD_MS = 4000;   // durata di ogni slide visibile
-        const FADE_MS = 1000;    // durata della dissolvenza (combacia col CSS transition)
-        const GAP_MS = 800;    // durata del "vuoto" bianco tra una slide e l'altra
+        const HOLD_MS = 4000;   
+        const FADE_MS = 1000;    
+        const GAP_MS = 800;    
 
         let current = 0;
         let slides = [];
@@ -203,18 +200,15 @@
             });
         }
 
-        // --- AVVIO INTELLIGENTE ---
         async function startSlideshow() {
             let itemsForSlides = [];
 
             if (isDesktop) {
-                // Su computer aspettiamo di calcolare l'orientamento per affiancarle
                 itemsForSlides = await Promise.all(MEDIA_LIST.map(async item => {
                     const orientation = await detectOrientation(item);
                     return { ...item, orientation };
                 }));
             } else {
-                // Su cellulare saltiamo il calcolo (così parte subito!)
                 itemsForSlides = MEDIA_LIST;
             }
 
@@ -225,156 +219,7 @@
             runSlideshow();
         }
 
-        // Fai partire tutto
         startSlideshow();
-    </script>
-
-  </body>
-</html>        }
-
-        function createMediaElement(item) {
-            let el;
-            if (item.type === 'image') {
-                el = document.createElement('img');
-                el.src = item.src;
-                el.alt = item.src.split('/').pop();
-            } else {
-                el = document.createElement('video');
-                el.loop = true;
-                el.muted = true;
-                el.playsInline = true;
-                el.classList.add('video-toggle');
-                const source = document.createElement('source');
-                source.src = item.src;
-                source.type = 'video/mp4';
-                el.appendChild(source);
-            }
-            el.classList.add('slide-media');
-            return el;
-        }
-
-        function createCaptionElement(item) {
-            const cap = document.createElement('div');
-            cap.className = 'slide-caption';
-            cap.textContent = item.title || '';
-            return cap;
-        }
-
-        // Costruisce i "gruppi" di slide: su desktop, coppie di verticali consecutive; il resto da solo
-        function buildGroups(items) {
-            if (!isDesktop) {
-                return items.map(item => [item]); // mobile: sempre una slide per file, invariato
-            }
-            const groups = [];
-            let i = 0;
-            while (i < items.length) {
-                const current = items[i];
-                const next = items[i + 1];
-                if (current.orientation === 'portrait' && next && next.orientation === 'portrait') {
-                    groups.push([current, next]);
-                    i += 2;
-                } else {
-                    groups.push([current]);
-                    i += 1;
-                }
-            }
-            return groups;
-        }
-
-        function renderSlides(groups) {
-            const container = document.getElementById('slideshow');
-            container.innerHTML = '';
-            groups.forEach(group => {
-                const slide = document.createElement('div');
-                slide.className = 'slide';
-
-                if (group.length === 2) {
-                    const pair = document.createElement('div');
-                    pair.className = 'slide-pair';
-                    group.forEach(item => {
-                        const half = document.createElement('div');
-                        half.className = 'pair-half';
-                        half.appendChild(createMediaElement(item));
-                        half.appendChild(createCaptionElement(item));
-                        pair.appendChild(half);
-                    });
-                    slide.appendChild(pair);
-                } else {
-                    slide.appendChild(createMediaElement(group[0]));
-                    slide.appendChild(createCaptionElement(group[0]));
-                }
-
-                container.appendChild(slide);
-            });
-        }
-
-        // --- SLIDESHOW: dissolvenza, vuoto tra le slide ---
-        const HOLD_MS = 4000;   // durata di ogni slide visibile
-        const FADE_MS = 1000;    // durata della dissolvenza (combacia col CSS transition)
-        const GAP_MS = 800;    // durata del "vuoto" bianco tra una slide e l'altra
-
-        let current = 0;
-        let slides = [];
-
-        function getMediaEls(slide) {
-            return Array.from(slide.querySelectorAll('.slide-media'));
-        }
-        function playVideos(slide) {
-            getMediaEls(slide).forEach(media => {
-                if (media.tagName === 'VIDEO') {
-                    media.currentTime = 0;
-                    media.play().catch(() => {});
-                }
-            });
-        }
-        function pauseVideos(slide) {
-            getMediaEls(slide).forEach(media => {
-                if (media.tagName === 'VIDEO') media.pause();
-            });
-        }
-
-        function runSlideshow() {
-            if (slides.length === 0) return;
-            const slide = slides[current];
-            slide.classList.add('active');
-            playVideos(slide);
-
-            setTimeout(() => {
-                slide.classList.remove('active');
-                pauseVideos(slide);
-
-                setTimeout(() => {
-                    current = (current + 1) % slides.length;
-                    runSlideshow();
-                }, FADE_MS + GAP_MS);
-            }, HOLD_MS);
-        }
-
-        function setupVideoClickToggle() {
-            const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-            if (isTouch) return;
-            document.querySelectorAll('.video-toggle').forEach(video => {
-                video.addEventListener('click', function () {
-                    if (video.paused) {
-                        video.play();
-                        video.muted = true;
-                    } else {
-                        video.muted = !video.muted;
-                    }
-                });
-            });
-        }
-
-        // --- Avvio: rileva l'orientamento di tutti i file, poi costruisce e avvia lo slideshow ---
-        Promise.all(MEDIA_LIST.map(item =>
-            detectOrientation(item).then(orientation => ({ ...item, orientation }))
-        )).then(itemsWithOrientation => {
-            const groups = buildGroups(itemsWithOrientation);
-            renderSlides(groups);
-            slides = Array.from(document.querySelectorAll('.slideshow-container .slide'));
-            setupVideoClickToggle();
-            runSlideshow();
-        });
     </script>
 
   </body>
