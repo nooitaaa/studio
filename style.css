@@ -146,11 +146,11 @@ body.desktop-mode .slide-media {
 
 .slide-caption {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 50px;
+  left: 150px;
   margin: 0;
-  color: black;
-  mix-blend-mode: none;
+  color: white;
+  mix-blend-mode: difference;
   font-family: "Times New Roman", Times, serif;
   font-size: 15px;
   line-height: 1.0;
