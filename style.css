@@ -67,8 +67,8 @@ body.homepage .footer1 {
   pointer-events: none;
 }
 body.homepage #div_horloge {
-  color: white;
-  mix-blend-mode: difference;
+  color: black;
+  mix-blend-mode: none;
 }
 
 /* ------------------------------------- */
