@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Info – Noa Merlini </title>
-
-    <link rel="stylesheet" href="style.css"> 
+    <title> Noa Merlini — About </title>
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
@@ -13,50 +12,95 @@
     <div class="footer1">
         <div class="header-left">
             <a href="index.html" class="header-link">
-                Noa Merlini <br>
+                Noa Merlini<br>
                 Concept research and Creative development
             </a>
         </div>
         <div class="header-right">
             <div id="div_horloge"></div>
-            <div class="header-location">Milan, Italy</div> 
-          
+            <div class="header-location">Milan, Italy</div>
+            <a href="index.html" class="nav-link">Index</a>
         </div>
     </div>
-    
-    <div class="clients">
-        
+
+    <div class="about-wrapper">
+      <div class="about-columns">
+
         <div class="colonna1">
-            From concept research to creative development and production – guided by a critical awareness of the tools and methodologies of communication and distribution.
-            <br><br>
-            Their practice focuses on visual and graphic design for publishing and communication, with a primary emphasis on printed matter.
-            <br><br>
-            Her work across design, fashion, and art, exploring how content can shape design.
-            
-            <br><br><br>
-            Contact her <a href="mailto:noamerlini@hotmail.it"><u>here</u></a>
+          <p>
+            Pepe Spike is a studio dedicated to the development of creative
+            projects — from concept development and creative research to
+            design and production — guided by a critical awareness of the tools
+            and methodologies of communication and distribution, jointly
+            run by Noa Merlini, Agnese Pozzobon and Martina Valente.
+          </p>
+          <p>
+            The studio practice focuses on visual and graphic design for publishing and
+            communication, with a primary emphasis on printed matter, alongside work
+            in data visualization and web design, visual identities, and art direction.
+          </p>
+          <p>
+            Pepe Spike works across design, fashion, and art, embracing a
+            porous vision that seeks spaces of contamination — exploring how
+            content can shape design, and how design, in turn, can shape content.
+          </p>
+          <p>Contact <a href="mailto:info@example.com">here</a></p>
         </div>
-        
+
         <div class="colonna2">
-            Thanks<br>
-            Riccardo Benassi – Visual Artist (Berlin, GE)<br>
-            Eyes on Talents – High Fashion Scouting Agency (Paris, FR)<br>
-            Carina Frey Stephanie Barth – Creative and Art direction (Milan, IT)<br>
-            Kv Roes – Fashion brand (Milan, IT)<br>
+          <h2>Thanks</h2>
+          <div class="about-list">
+            <div>Riccardo Benassi — Visual Artist (Berlin, GE)</div>
+            <div>Dual Room — Art direction and Graphic Design (Biel/Bien, CH)</div>
+            <div>EY studio — Graphic Design (Vicenza, IT)</div>
+            <div>Eyes on Talents — High Fashion Scouting Agency (Paris, FR)</div>
+            <div>Carina Frey Stephanie Barth — Creative and Art direction (Milan, IT)</div>
+            <div>Esiete studio — Graphic Design (Barcelona, ES)</div>
+            <div>Fondazione Bisazza — Art and Design Foundation (Vicenza, IT)</div>
+            <div>Genera — Graphic Design, CGI and AI (Milan, IT)</div>
+            <div>ISIA U — Graphic Design University of Urbino (Urbino, IT)</div>
+            <div>Kv Roes — Fashion brand (Milan, IT)</div>
+            <div>Matter Of Studio — Graphic Design (Stuttgart, GE)</div>
+            <div>Sotterranea — Live arts association (Biella, IT)</div>
+            <div>TIPS — Research Department, University of Padova (Padova, IT)</div>
+            <div>Twin Studio — Graphic Design (Milan, IT)</div>
+          </div>
         </div>
-        
+
         <div class="colonna3">
-            Education <br><br>
-            MA Communication and Design for Publishing, ISIA Urbino (IT)<br>
-            BA Visual Arts, Iuav, University of Venice (IT)<br>
-            <br><br>
-            Lab for New Immagination II Residency, <br> MACRO – Museo di Arte Contemporanea di Roma, 2022 (Rome, IT)
-            <br><br><br>
-            Independent project<br>
-            radio spugna, co-founder <br>
+          <h2>Education</h2>
+          <div class="about-list">
+            <div>MA Communication and Design for Publishing, ISIA Urbino (IT)</div>
+            <div>BA Visual Arts, Iuav, University of Venice (IT)</div>
+            <div>BA Graphic and Multimedia Communication, IUSVE Venice (IT)</div>
+            <div>BA Product and Visual Design, Iuav, University of Venice (IT)</div>
+          </div>
+
+          <p>
+            Summer After School Residency,<br>
+            Studio Jim Fontana, 2025 (Ouessant island, FR)<br>
+            Lab for New Immagination II Residency,<br>
+            MACRO — Museo di Arte Contemporanea di Roma, 2022 (Rome, IT)
+          </p>
+
+          <h2>Independent project</h2>
+          <p>radio spugna, co-founders</p>
         </div>
-        
+
+      </div>
     </div>
-    
+
+    <script>
+        function tickClock() {
+            const el = document.getElementById('div_horloge');
+            if (!el) return;
+            const now = new Date();
+            const pad = n => String(n).padStart(2, '0');
+            el.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+        }
+        tickClock();
+        setInterval(tickClock, 1000);
+    </script>
+
   </body>
 </html>
