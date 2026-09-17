@@ -1,9 +1,10 @@
-/* ⚙️ REGOLE FONDAMENTALI ORIGINALI */
+/* ⚙️ REGOLE FONDAMENTALI */
+* { box-sizing: border-box; }
+
 a {
   text-decoration: none;
   color: black;
 }
-
 a:hover, a:visited {
   text-decoration: none;
   color: black;
@@ -12,58 +13,209 @@ a:hover, a:visited {
 body {
   margin: 0;
   padding: 0;
-  font-family: "Times New Roman", Times, serif; 
-  font-weight: normal; 
-  background-color: white; 
-  font-size: 13px; 
-  line-height: 15px; 
+  font-family: "Times New Roman", Times, serif;
+  font-weight: normal;
+  background-color: white;
+  font-size: 13px;
+  line-height: 15px;
   color: black;
-  text-align: center;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body.homepage {
-  overflow-y: auto;
-  padding-top: 0; 
-}
-
-::selection {
-    background: #FFFF00; 
-    color: black;
-}
-::-moz-selection { 
-    background: #FFFF00;
-    color: black;
-}
+::selection { background: #FFFF00; color: black; }
+::-moz-selection { background: #FFFF00; color: black; }
 
 /* ------------------------------------- */
-/* 🔝 HEADER FISSO (CLASSE .footer1) */
+/* 🔝 HEADER FISSO */
 /* ------------------------------------- */
 
 .footer1 {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0; 
+  right: 0;
   display: flex;
-  justify-content: space-between; 
-  align-items: flex-start; 
-  padding: 8px 10px 10px 10px; 
-  margin: 0; 
-  background-color: white; 
-  z-index: 1000; 
-  color: black; 
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8px 10px 10px 10px;
+  margin: 0;
+  background-color: white;
+  z-index: 1000;
+  color: black;
   font-weight: normal;
   font-size: inherit;
   font-family: inherit;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
-.footer1 a {
-    color: black; 
-    text-decoration: none;
+.header-left { text-align: left; }
+.header-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.header-location { margin-top: 0; }
+.nav-link { margin-top: 0; }
+
+/* Homepage: header trasparente, solo orologio in overlay, niente barra che riserva spazio */
+body.homepage .footer1 {
+  justify-content: flex-end;
+  background-color: transparent;
+  pointer-events: none;
+}
+body.homepage #div_horloge {
+  color: white;
+  mix-blend-mode: difference;
+}
+
+/* ------------------------------------- */
+/* 🎞️ SLIDESHOW FULLSCREEN A DISSOLVENZA (index.html) */
+/* ------------------------------------- */
+
+.slideshow-container {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+}
+
+.slideshow-container.fullscreen {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  overflow: hidden;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slide img,
+.slide video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  /* verticali: piena altezza, vuoto a dx / orizzontali: piena larghezza, vuoto in basso */
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+@media (hover: hover) {
+  .video-toggle { cursor: pointer; }
+}
+.video-toggle::-webkit-media-controls {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.slideshow-caption {
+  position: fixed;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: white;
+  mix-blend-mode: difference;
+  z-index: 10;
+  text-align: left;
+  font-family: inherit;
+  font-size: 27px;
+  line-height: 1.15;
+  text-decoration: none;
+}
+
+/* ------------------------------------- */
+/* 👥 PAGINA ABOUT */
+/* ------------------------------------- */
+
+.about-wrapper {
+  padding: 90px 10px 60px 10px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.about-columns {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+.about-columns > div {
+  flex: 1 1 0;
+}
+
+.about-columns h2 {
+  font-weight: normal;
+  font-size: inherit;
+  margin: 0 0 6px 0;
+}
+
+.about-columns p {
+  margin: 0 0 16px 0;
+}
+
+.about-list {
+  margin: 0 0 16px 0;
+}
+.about-list div {
+  margin-bottom: 2px;
+}
+
+/* ------------------------------------- */
+/* 📱 MOBILE */
+/* ------------------------------------- */
+
+@media screen and (max-width: 840px) {
+
+  .footer1 {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 10px;
+    height: auto;
+  }
+  .header-right {
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  .slideshow-container.fullscreen {
+    height: 100vh;
+  }
+  .slideshow-caption {
+    left: 10px;
+    font-size: 18px;
+  }
+  .video-toggle { pointer-events: none; }
+
+  .about-wrapper { padding-top: 120px; }
+  .about-columns {
+    flex-direction: column;
+    gap: 30px;
+  }
+}    text-decoration: none;
 }
 .header-link {
     color: inherit; 
