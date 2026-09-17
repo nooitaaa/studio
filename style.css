@@ -152,7 +152,7 @@ body.desktop-mode .slide-media {
   color: white;
   mix-blend-mode: difference;
   font-family: "Times New Roman", Times, serif;
-  font-size: 20px;
+  font-size: 10px;
   line-height: 1.0;
   z-index: 5;
   pointer-events: none;
