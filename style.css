@@ -172,8 +172,8 @@ body.desktop-mode .slide-media {
   top: 50%;
   left: 100px;
   transform: translateY(-50%);
-  color: white;
-  mix-blend-mode: difference;
+  color: black;
+  mix-blend-mode: none;
   z-index: 10;
   text-align: left;
   font-family: inherit;
