@@ -177,8 +177,8 @@ body.desktop-mode .slide-media {
   z-index: 10;
   text-align: left;
   font-family: inherit;
-  font-size: 34px;
-  line-height: 1.15;
+  font-size: 24px;
+  line-height: 1;
   text-decoration: none;
 }
 
