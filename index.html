@@ -7,19 +7,7 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-      /* --- Link invisibile che copre tutto lo schermo --- */
-      .global-link-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 9999; /* Sta sopra a quasi tutto */
-        display: block;
-        background-color: transparent; 
-      }
-      
-      /* --- Regole applicate SOLO su schermi piccoli (Mobile) --- */
+      /* --- Regole applicate SOLO su schermi piccoli (Mobile). Desktop non viene toccato --- */
       @media (max-width: 840px) {
           .slide {
               position: relative;
@@ -32,8 +20,8 @@
           
           .slide-caption {
               position: absolute !important;
-              bottom: 20px !important; /* Distanza dal basso su cellulare */
-              left: 20px !important;   /* Distanza da sinistra su cellulare */
+              bottom: 20px !important; /* Allineato in basso */
+              left: 20px !important;   /* Allineato a sinistra */
               margin: 0 !important;
               color: black;
               font-family: "Times New Roman", Times, serif;
@@ -48,18 +36,13 @@
 
   <body class="homepage">
 
-    <!-- Il velo invisibile che al tocco porta su about.html in qualsiasi punto -->
-    <a href="about.html" class="global-link-overlay"></a>
-
     <div class="slideshow-container fullscreen" id="slideshow"></div>
 
-    <!-- Il tuo nome ha uno z-index più alto del velo invisibile (10000) così è cliccabile -->
-    <a href="about.html" class="slideshow-caption" style="position: absolute; bottom: 30px; left: 30px; z-index: 10000; text-decoration: none; color: black;">
+    <!-- Ho ripristinato il tuo codice esatto, senza inline styles, così legge il tuo style.css -->
+    <a href="about.html" class="slideshow-caption">
         Noa Merlini<br>
-        Graphic Design and Creative Development<br>
-      <br>
-        Via Bernardino Verro 41, 
-      <br>Milan (Italy)
+        Graphic Design and Creative development<br>
+        Via Bernardino Verro 41, Milan (Italy)
     </a>
 
     <script>
@@ -230,21 +213,7 @@
             }, HOLD_MS);
         }
 
-        function setupVideoClickToggle() {
-            const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-            if (isTouch) return;
-            document.querySelectorAll('.video-toggle').forEach(video => {
-                video.addEventListener('click', function () {
-                    if (video.paused) {
-                        video.play();
-                        video.muted = true;
-                    } else {
-                        video.muted = !video.muted;
-                    }
-                });
-            });
-        }
-
+        // --- AVVIO INTELLIGENTE ---
         async function startSlideshow() {
             let itemsForSlides = [];
 
@@ -260,11 +229,22 @@
             const groups = buildGroups(itemsForSlides);
             renderSlides(groups);
             slides = Array.from(document.querySelectorAll('.slideshow-container .slide'));
-            setupVideoClickToggle();
             runSlideshow();
         }
 
+        // Fai partire tutto
         startSlideshow();
+
+        // --- SOLUZIONE PULITA: CLICCARE IN QUALSIASI PUNTO PORTA ALLA PAGINA ABOUT ---
+        document.addEventListener('click', function(event) {
+            // Se clicchi esattamente sopra il tuo nome in basso (che è già un link ad about.html) 
+            // lascia fare al link il suo lavoro naturale.
+            if (event.target.closest('a')) return;
+            
+            // Per qualsiasi altro punto dello schermo: reindirizza alla pagina About
+            window.location.href = 'about.html';
+        });
+
     </script>
 
   </body>
