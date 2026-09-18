@@ -147,7 +147,7 @@ body.desktop-mode .slide-media {
 .slide-caption {
   position: absolute;
   bottom: 50px;
-  left: 150px;
+  left: 100px;
   margin: 0;
   color: white;
   mix-blend-mode: difference;
