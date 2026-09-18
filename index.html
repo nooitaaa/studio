@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-      /* --- Regole applicate SOLO su schermi piccoli (Mobile). Desktop non viene toccato --- */
+      /* --- Regole applicate SOLO su schermi piccoli (Mobile o Desktop stretto). --- */
       @media (max-width: 840px) {
           .slide {
               position: relative;
@@ -20,8 +20,8 @@
           
           .slide-caption {
               position: absolute !important;
-              bottom: 20px !important; /* Allineato in basso */
-              left: 20px !important;   /* Allineato a sinistra */
+              bottom: 20px !important; 
+              left: 20px !important;   
               margin: 0 !important;
               color: black;
               font-family: "Times New Roman", Times, serif;
@@ -38,17 +38,13 @@
 
     <div class="slideshow-container fullscreen" id="slideshow"></div>
 
-    <!-- Ho ripristinato il tuo codice esatto, senza inline styles, così legge il tuo style.css -->
     <a href="about.html" class="slideshow-caption">
         Noa Merlini<br>
-        Graphic Design and Creative development<br>
-      <br>
-        Via Bernardino Verro 41, 
-      <br>Milan (Italy)
+        Graphic Design and Creative development<br><br>
+        Via Bernardino Verro 41, <br>Milan (Italy)
     </a>
 
     <script>
-        // --- Elenco dei file ---
         const MEDIA_LIST = [
             { type: 'image', src: 'images/IMG_4402.png', title: 'Portrait with Plants' },
             { type: 'image', src: 'images/IMG_4409.png', title: 'Portrait in Nature' },
@@ -75,9 +71,24 @@
         ];
 
         const DESKTOP_BREAKPOINT = 841;
-        const isDesktop = window.innerWidth >= DESKTOP_BREAKPOINT;
-        if (isDesktop) document.body.classList.add('desktop-mode');
-        else document.body.classList.add('mobile-mode');
+        
+        let slideshowTimeoutId = null;
+        let fadeTimeoutId = null;
+        let isDesktopState = window.innerWidth >= DESKTOP_BREAKPOINT;
+
+        // Memorizziamo gli items con il loro orientamento dopo il primo caricamento
+        let preparedItems = []; 
+
+        function updateBodyClass() {
+            if (isDesktopState) {
+                document.body.classList.add('desktop-mode');
+                document.body.classList.remove('mobile-mode');
+            } else {
+                document.body.classList.add('mobile-mode');
+                document.body.classList.remove('desktop-mode');
+            }
+        }
+        updateBodyClass();
 
         function detectOrientation(item) {
             return new Promise(resolve => {
@@ -128,9 +139,11 @@
         }
 
         function buildGroups(items) {
-            if (!isDesktop) {
+            // Se siamo sotto la soglia, mostra sempre 1 immagine alla volta
+            if (!isDesktopState) {
                 return items.map(item => [item]); 
             }
+            
             const groups = [];
             let i = 0;
             while (i < items.length) {
@@ -167,7 +180,7 @@
                     slide.appendChild(pair);
                 } else {
                     slide.appendChild(createMediaElement(group[0]));
-                    slide.appendChild(createCaptionElement(group[0])); // Aggiunge testo su Mobile
+                    slide.appendChild(createCaptionElement(group[0])); 
                 }
 
                 container.appendChild(slide);
@@ -180,6 +193,7 @@
 
         let current = 0;
         let slides = [];
+        let slideshowRunning = false;
 
         function getMediaEls(slide) {
             return Array.from(slide.querySelectorAll('.slide-media'));
@@ -199,51 +213,75 @@
         }
 
         function runSlideshow() {
-            if (slides.length === 0) return;
+            if (slides.length === 0 || !slideshowRunning) return;
             const slide = slides[current];
             slide.classList.add('active');
             playVideos(slide);
 
-            setTimeout(() => {
+            slideshowTimeoutId = setTimeout(() => {
                 slide.classList.remove('active');
                 pauseVideos(slide);
 
-                setTimeout(() => {
+                fadeTimeoutId = setTimeout(() => {
                     current = (current + 1) % slides.length;
                     runSlideshow();
                 }, FADE_MS + GAP_MS);
             }, HOLD_MS);
         }
 
-        // --- AVVIO INTELLIGENTE ---
-        async function startSlideshow() {
-            let itemsForSlides = [];
+        function stopSlideshow() {
+            slideshowRunning = false;
+            clearTimeout(slideshowTimeoutId);
+            clearTimeout(fadeTimeoutId);
+            
+            // Nasconde tutte le slide attive
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                pauseVideos(slide);
+            });
+        }
 
-            if (isDesktop) {
-                itemsForSlides = await Promise.all(MEDIA_LIST.map(async item => {
+        // --- AVVIO E RIDIMENSIONAMENTO ---
+        async function startSlideshow() {
+            // Calcola le orientazioni solo la primissima volta
+            if (preparedItems.length === 0) {
+                preparedItems = await Promise.all(MEDIA_LIST.map(async item => {
                     const orientation = await detectOrientation(item);
                     return { ...item, orientation };
                 }));
-            } else {
-                itemsForSlides = MEDIA_LIST;
             }
 
-            const groups = buildGroups(itemsForSlides);
+            const groups = buildGroups(preparedItems);
             renderSlides(groups);
             slides = Array.from(document.querySelectorAll('.slideshow-container .slide'));
+            
+            // Riporta il counter all'inizio quando ricalcoliamo il layout
+            current = 0; 
+            slideshowRunning = true;
             runSlideshow();
         }
 
-        // Fai partire tutto
+        // Fai partire tutto all'inizio
         startSlideshow();
 
-        // --- SOLUZIONE PULITA: CLICCARE IN QUALSIASI PUNTO PORTA ALLA PAGINA ABOUT ---
+        // Se l'utente allarga o stringe la finestra del browser...
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const nowIsDesktop = width >= DESKTOP_BREAKPOINT;
+
+            // ...se passa da "Largo" a "Stretto" (o viceversa), ferma tutto e ricalcola!
+            if (isDesktopState !== nowIsDesktop) {
+                isDesktopState = nowIsDesktop;
+                updateBodyClass();
+                
+                stopSlideshow();
+                startSlideshow(); // Riavvia ricalcolando i gruppi di immagini
+            }
+        });
+
+        // --- CLICCARE IN QUALSIASI PUNTO PORTA ALLA PAGINA ABOUT ---
         document.addEventListener('click', function(event) {
-            // Se clicchi esattamente sopra il tuo nome in basso (che è già un link ad about.html) 
-            // lascia fare al link il suo lavoro naturale.
             if (event.target.closest('a')) return;
-            
-            // Per qualsiasi altro punto dello schermo: reindirizza alla pagina About
             window.location.href = 'about.html';
         });
 
