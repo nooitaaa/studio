@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Noa Merlini </title>
+    <title>Noa Merlini</title>
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
       /* --- Regole applicate SOLO su schermi piccoli (Mobile o Desktop stretto). --- */
       @media (max-width: 840px) {
@@ -17,11 +17,11 @@
               align-items: center;
               justify-content: center;
           }
-          
+
           .slide-caption {
               position: absolute !important;
-              bottom: 20px !important; 
-              left: 20px !important;   
+              bottom: 20px !important;
+              left: 20px !important;
               margin: 0 !important;
               color: black;
               font-family: "Times New Roman", Times, serif;
@@ -45,39 +45,46 @@
     </a>
 
     <script>
+        // Aggiungi il campo "project" con lo STESSO valore alle immagini
+        // verticali che vuoi vedere sempre abbinate tra loro (stesso progetto).
+        // Le immagini senza "project" (o con project diverso dalle altre)
+        // non verranno MAI abbinate ad altre: restano sempre singole.
         const MEDIA_LIST = [
-            { type: 'image', src: 'images/IMG_4402.png', title: 'Portrait with Plants' },
-            { type: 'image', src: 'images/IMG_4409.png', title: 'Portrait in Nature' },
-            { type: 'image', src: 'images/IMG_4410.png', title: 'Hand and Red Detail' },
-            { type: 'image', src: 'images/IMG_4411_1.png', title: 'Collage Page' },
-            { type: 'image', src: 'images/IMG_4416.png', title: 'Couple Portrait' },
-            { type: 'image', src: 'images/IMG_4419.png', title: 'Abstract Detail' },
-            { type: 'image', src: 'images/IMG_4423_1.png', title: 'Object on Surface' },
-            { type: 'image', src: 'images/IMG_4428.png', title: 'Open Book (Spread 1)' },
-            { type: 'image', src: 'images/IMG_4430.png', title: 'Open Book (Spread 2)' },
-            { type: 'image', src: 'images/IMG_4432.png', title: 'Text Detail (Spread)' },
-            { type: 'image', src: 'images/IMG_4444.png', title: 'Open Book (Binding)' },
-            { type: 'image', src: 'images/IMG_4447.png', title: 'Open Catalog Pages' },
-            { type: 'image', src: 'images/IMG_4452.png', title: 'Male Portrait (Suit)' },
-            { type: 'image', src: 'images/IMG_4453.png', title: 'Close-Up Portrait' },
-            { type: 'image', src: 'images/IMG_4454.png', title: 'Female Portrait (Smiling)' },
-            { type: 'image', src: 'images/IMG_4456.png', title: 'Book Collage Page' },
-            { type: 'image', src: 'images/IMG_4458.png', title: 'Fabric Texture' },
-            { type: 'image', src: 'images/IMG_4471.png', title: 'Object Display' },
-            { type: 'image', src: 'images/IMG_4473.png', title: 'Mixed Media Page' },
-            { type: 'image', src: 'images/IMG_4474.png', title: 'Illustrated Page' },
-            { type: 'image', src: 'images/IMG_4476.png', title: 'Paper Detail' },
-            { type: 'image', src: 'images/IMG_4480.png', title: 'Urban Scene' },
+            { type: 'image', src: 'images/IMG_4402.png', title: 'Portrait with Plants', project: 'y' },
+            { type: 'image', src: 'images/IMG_4409.png', title: 'Portrait in Nature', project: 'y' },
+            { type: 'image', src: 'images/IMG_4410.png', title: 'Hand and Red Detail', project: 'flash art' },
+            { type: 'image', src: 'images/IMG_4411_1.png', title: 'Collage Page', project: 'flash art' },
+            { type: 'image', src: 'images/IMG_4416.png', title: 'Couple Portrait', project: 'first sight' },
+            { type: 'image', src: 'images/IMG_4419.png', title: 'Abstract Detail', project: 'first sight' },
+            { type: 'image', src: 'images/IMG_4423_1.png', title: 'Object on Surface', project: 'first sight' },
+            { type: 'image', src: 'images/IMG_4428.png', title: 'Open Book (Spread 1)', project: 'fronzoni' },
+            { type: 'image', src: 'images/IMG_4430.png', title: 'Open Book (Spread 2)', project: 'fronzoni' },
+            { type: 'image', src: 'images/IMG_4432.png', title: 'Text Detail (Spread)', project: 'dddd' },
+            { type: 'image', src: 'images/IMG_4444.png', title: 'Open Book (Binding)', project: 'camouflage' },
+            { type: 'image', src: 'images/IMG_4447.png', title: 'Open Catalog Pages', project: 'camouflage' },
+            { type: 'image', src: 'images/IMG_4452.png', title: 'Male Portrait (Suit)', project: 'x' },
+            { type: 'image', src: 'images/IMG_4453.png', title: 'Close-Up Portrait', project: 'x' },
+            { type: 'image', src: 'images/IMG_4454.png', title: 'Female Portrait (Smiling)', project: 'x' },
+            { type: 'image', src: 'images/IMG_4456.png', title: 'Book Collage Page', project: 'x' },
+            { type: 'image', src: 'images/IMG_4458.png', title: 'Fabric Texture', project: 'x' },
+            { type: 'image', src: 'images/IMG_4471.png', title: 'Object Display', project: 'x' },
+            { type: 'image', src: 'images/IMG_4473.png', title: 'Mixed Media Page', project: 'x' },
+            { type: 'image', src: 'images/IMG_4474.png', title: 'Illustrated Page', project: 'x' },
+            { type: 'image', src: 'images/IMG_4476.png', title: 'Paper Detail', project: 'x' },
+            { type: 'image', src: 'images/IMG_4480.png', title: 'Urban Scene', project: 'x' },
         ];
 
         const DESKTOP_BREAKPOINT = 841;
-        
+
         let slideshowTimeoutId = null;
         let fadeTimeoutId = null;
         let isDesktopState = window.innerWidth >= DESKTOP_BREAKPOINT;
 
-        // Memorizziamo gli items con il loro orientamento dopo il primo caricamento
-        let preparedItems = []; 
+        // Elementi già caricati (con orientamento rilevato), popolati una sola volta.
+        let preparedItems = [];
+        // Ordine mescolato dei "blocchi" (singoli o coppie di stesso progetto),
+        // calcolato una sola volta per sessione/pagina.
+        let shuffledBlocks = null;
 
         function updateBodyClass() {
             if (isDesktopState) {
@@ -90,32 +97,11 @@
         }
         updateBodyClass();
 
-        function detectOrientation(item) {
-            return new Promise(resolve => {
-                if (item.type === 'image') {
-                    const img = new Image();
-                    img.onload = () => resolve(img.naturalWidth >= img.naturalHeight ? 'landscape' : 'portrait');
-                    img.onerror = () => resolve('landscape');
-                    img.src = item.src;
-                } else {
-                    const video = document.createElement('video');
-                    video.muted = true;       
-                    video.playsInline = true; 
-                    video.preload = 'metadata';
-                    video.onloadedmetadata = () => resolve(video.videoWidth >= video.videoHeight ? 'landscape' : 'portrait');
-                    video.onerror = () => resolve('landscape');
-                    video.src = item.src;
-                }
-            });
-        }
-
-        function createMediaElement(item) {
+        function buildMediaElement(item) {
             let el;
             if (item.type === 'image') {
                 el = document.createElement('img');
-                el.src = item.src;
                 el.alt = item.title || 'Portfolio image';
-                el.loading = 'lazy'; 
             } else {
                 el = document.createElement('video');
                 el.loop = true;
@@ -123,12 +109,38 @@
                 el.playsInline = true;
                 el.classList.add('video-toggle');
                 const source = document.createElement('source');
-                source.src = item.src;
                 source.type = 'video/mp4';
                 el.appendChild(source);
             }
             el.classList.add('slide-media');
             return el;
+        }
+
+        // Carica ogni file UNA SOLA VOLTA: lo stesso elemento creato qui
+        // serve sia per rilevare l'orientamento sia per essere mostrato in pagina
+        // (niente doppio download come nella versione precedente).
+        function loadItem(item, index) {
+            return new Promise(resolve => {
+                const el = buildMediaElement(item);
+                const finish = (orientation) => resolve({ ...item, el, orientation });
+
+                if (item.type === 'image') {
+                    el.onload = () => finish(el.naturalWidth >= el.naturalHeight ? 'landscape' : 'portrait');
+                    el.onerror = () => finish('landscape');
+                    if (index === 0) {
+                        // Dai priorità al primo elemento visibile.
+                        el.fetchPriority = 'high';
+                    } else {
+                        el.loading = 'eager'; // sono comunque tutte "in viewport", meglio essere espliciti
+                    }
+                    el.src = item.src;
+                } else {
+                    el.onloadedmetadata = () => finish(el.videoWidth >= el.videoHeight ? 'landscape' : 'portrait');
+                    el.onerror = () => finish('landscape');
+                    el.querySelector('source').src = item.src;
+                    el.load();
+                }
+            });
         }
 
         function createCaptionElement(item) {
@@ -138,26 +150,53 @@
             return cap;
         }
 
-        function buildGroups(items) {
-            // Se siamo sotto la soglia, mostra sempre 1 immagine alla volta
-            if (!isDesktopState) {
-                return items.map(item => [item]); 
+        function shuffle(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
             }
-            
-            const groups = [];
-            let i = 0;
-            while (i < items.length) {
-                const current = items[i];
-                const next = items[i + 1];
-                if (current.orientation === 'portrait' && next && next.orientation === 'portrait') {
-                    groups.push([current, next]);
-                    i += 2;
-                } else {
-                    groups.push([current]);
-                    i += 1;
+            return a;
+        }
+
+        // Raggruppa per "project": dentro ogni progetto abbina i verticali
+        // consecutivi a due a due. Immagini di progetti diversi non vengono MAI
+        // messe nella stessa coppia.
+        function buildBlocksFromProjects(items) {
+            const byProject = new Map();
+            items.forEach(item => {
+                const key = item.project ? item.project : `single-${item.src}`;
+                if (!byProject.has(key)) byProject.set(key, []);
+                byProject.get(key).push(item);
+            });
+
+            const blocks = [];
+            byProject.forEach(group => {
+                let i = 0;
+                while (i < group.length) {
+                    const curr = group[i];
+                    const next = group[i + 1];
+                    if (curr.orientation === 'portrait' && next && next.orientation === 'portrait') {
+                        blocks.push([curr, next]);
+                        i += 2;
+                    } else {
+                        blocks.push([curr]);
+                        i += 1;
+                    }
                 }
+            });
+            return blocks;
+        }
+
+        function buildGroups() {
+            if (!shuffledBlocks) {
+                shuffledBlocks = shuffle(buildBlocksFromProjects(preparedItems));
             }
-            return groups;
+            if (isDesktopState) {
+                return shuffledBlocks;
+            }
+            // Mobile: un'immagine per slide, ma mantenendo lo stesso ordine mescolato.
+            return shuffledBlocks.flatMap(block => block.map(item => [item]));
         }
 
         function renderSlides(groups) {
@@ -173,23 +212,23 @@
                     group.forEach(item => {
                         const half = document.createElement('div');
                         half.className = 'pair-half';
-                        half.appendChild(createMediaElement(item));
+                        half.appendChild(item.el);
                         half.appendChild(createCaptionElement(item));
                         pair.appendChild(half);
                     });
                     slide.appendChild(pair);
                 } else {
-                    slide.appendChild(createMediaElement(group[0]));
-                    slide.appendChild(createCaptionElement(group[0])); 
+                    slide.appendChild(group[0].el);
+                    slide.appendChild(createCaptionElement(group[0]));
                 }
 
                 container.appendChild(slide);
             });
         }
 
-        const HOLD_MS = 4000;   
-        const FADE_MS = 1000;    
-        const GAP_MS = 800;    
+        const HOLD_MS = 4000;
+        const FADE_MS = 1000;
+        const GAP_MS = 800;
 
         let current = 0;
         let slides = [];
@@ -233,8 +272,7 @@
             slideshowRunning = false;
             clearTimeout(slideshowTimeoutId);
             clearTimeout(fadeTimeoutId);
-            
-            // Nasconde tutte le slide attive
+
             slides.forEach(slide => {
                 slide.classList.remove('active');
                 pauseVideos(slide);
@@ -243,39 +281,32 @@
 
         // --- AVVIO E RIDIMENSIONAMENTO ---
         async function startSlideshow() {
-            // Calcola le orientazioni solo la primissima volta
+            // Carica (una sola volta) tutti i file e rileva il loro orientamento.
             if (preparedItems.length === 0) {
-                preparedItems = await Promise.all(MEDIA_LIST.map(async item => {
-                    const orientation = await detectOrientation(item);
-                    return { ...item, orientation };
-                }));
+                preparedItems = await Promise.all(MEDIA_LIST.map((item, idx) => loadItem(item, idx)));
             }
 
-            const groups = buildGroups(preparedItems);
+            const groups = buildGroups();
             renderSlides(groups);
             slides = Array.from(document.querySelectorAll('.slideshow-container .slide'));
-            
-            // Riporta il counter all'inizio quando ricalcoliamo il layout
-            current = 0; 
+
+            current = 0;
             slideshowRunning = true;
             runSlideshow();
         }
 
-        // Fai partire tutto all'inizio
         startSlideshow();
 
-        // Se l'utente allarga o stringe la finestra del browser...
         window.addEventListener('resize', () => {
             const width = window.innerWidth;
             const nowIsDesktop = width >= DESKTOP_BREAKPOINT;
 
-            // ...se passa da "Largo" a "Stretto" (o viceversa), ferma tutto e ricalcola!
             if (isDesktopState !== nowIsDesktop) {
                 isDesktopState = nowIsDesktop;
                 updateBodyClass();
-                
+
                 stopSlideshow();
-                startSlideshow(); // Riavvia ricalcolando i gruppi di immagini
+                startSlideshow(); // rigenera i gruppi (gli elementi sono già in cache, non si ricaricano)
             }
         });
 
