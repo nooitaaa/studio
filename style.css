@@ -79,6 +79,7 @@ body.homepage #div_horloge {
   position: relative;
   overflow: hidden;
   background-color: white;
+  touch-action: none;
 }
 
 .slideshow-container.fullscreen {
@@ -96,12 +97,30 @@ body.homepage #div_horloge {
   bottom: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1.2s ease;
+  transition: opacity 1.2s ease-in-out;
   overflow: hidden;
 }
 .slide.active {
   opacity: 1;
   pointer-events: auto;
+}
+
+.slide.leaving .slide-caption {
+  opacity: 0;
+}
+
+.white-fade {
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 180ms ease-in-out;
+}
+
+.white-fade.active {
+  opacity: 1;
 }
 
 .slide-media {
@@ -149,13 +168,18 @@ body.desktop-mode .slide-media {
   bottom: 50px;
   left: 100px;
   margin: 0;
-  color: white;
-  mix-blend-mode: difference;
+  color: black;
+  mix-blend-mode: normal;
   font-family: "Times New Roman", Times, serif;
   font-size: 15px;
   line-height: 1.0;
-  z-index: 5;
+  z-index: 6;
   pointer-events: none;
+}
+
+.slide-caption.needs-contrast {
+  color: white;
+  mix-blend-mode: difference;
 }
 
 @media (hover: hover) {

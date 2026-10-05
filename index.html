@@ -10,7 +10,9 @@
       /* --- Regole applicate SOLO su schermi piccoli (Mobile o Desktop stretto). --- */
       @media (max-width: 840px) {
           .slide {
-              position: relative;
+              position: absolute;
+              top: 0;
+              left: 0;
               width: 100%;
               height: 100%;
               display: flex;
@@ -24,10 +26,11 @@
               left: 20px !important;
               margin: 0 !important;
               color: black;
+              mix-blend-mode: normal;
               font-family: "Times New Roman", Times, serif;
               font-size: 15px;
               line-height: 1.0;
-              z-index: 5;
+              z-index: 6 !important;
               pointer-events: none;
           }
       }
@@ -50,29 +53,31 @@
         // Le immagini senza "project" (o con project diverso dalle altre)
         // non verranno MAI abbinate ad altre: restano sempre singole.
         const MEDIA_LIST = [
-            { type: 'image', src: 'images/IMG_4402.png', title: 'Portrait with Plants', project: 'y' },
-            { type: 'image', src: 'images/IMG_4409.png', title: 'Portrait in Nature', project: 'y' },
-            { type: 'image', src: 'images/IMG_4410.png', title: 'Hand and Red Detail', project: 'flash art' },
-            { type: 'image', src: 'images/IMG_4411_1.png', title: 'Collage Page', project: 'flash art' },
-            { type: 'image', src: 'images/IMG_4416.png', title: 'Couple Portrait', project: 'first sight' },
-            { type: 'image', src: 'images/IMG_4419.png', title: 'Abstract Detail', project: 'first sight' },
-            { type: 'image', src: 'images/IMG_4423_1.png', title: 'Object on Surface', project: 'first sight' },
-            { type: 'image', src: 'images/IMG_4428.png', title: 'Open Book (Spread 1)', project: 'fronzoni' },
-            { type: 'image', src: 'images/IMG_4430.png', title: 'Open Book (Spread 2)', project: 'fronzoni' },
-            { type: 'image', src: 'images/IMG_4432.png', title: 'Text Detail (Spread)', project: 'dddd' },
-            { type: 'image', src: 'images/IMG_4444.png', title: 'Open Book (Binding)', project: 'camouflage' },
-            { type: 'image', src: 'images/IMG_4447.png', title: 'Open Catalog Pages', project: 'camouflage' },
-            { type: 'image', src: 'images/IMG_4452.png', title: 'Male Portrait (Suit)', project: 'x' },
-            { type: 'image', src: 'images/IMG_4453.png', title: 'Close-Up Portrait', project: 'x' },
-            { type: 'image', src: 'images/IMG_4454.png', title: 'Female Portrait (Smiling)', project: 'x' },
-            { type: 'image', src: 'images/IMG_4456.png', title: 'Book Collage Page', project: 'x' },
-            { type: 'image', src: 'images/IMG_4458.png', title: 'Fabric Texture', project: 'x' },
-            { type: 'image', src: 'images/IMG_4471.png', title: 'Object Display', project: 'x' },
-            { type: 'image', src: 'images/IMG_4473.png', title: 'Mixed Media Page', project: 'x' },
-            { type: 'image', src: 'images/IMG_4474.png', title: 'Illustrated Page', project: 'x' },
-            { type: 'image', src: 'images/IMG_4476.png', title: 'Paper Detail', project: 'x' },
-            { type: 'image', src: 'images/IMG_4480.png', title: 'Urban Scene', project: 'x' },
-        ];
+            { title: 'Camouflage', caption: 'Camouflage. An Act of conformity and resistance, 2024-5. Research, writing, graphic and book design.', project: 'camouflage', files: ['Camouflage_1.jpeg', 'Camouflage_2.jpeg', 'Camouflage_3.jpeg', 'Camouflage_4.jpeg', 'Camouflage_6.jpeg', 'Camouflage_8.jpeg', 'Camouflage_9.jpeg', 'Camouflage_10.jpeg'] },
+            { title: 'DDDD', caption: 'Editorial and Production Assistant for Daily Dense Dance Desiderio (DDDD) by Riccardo Benassi, 2021', project: 'dddd', files: ['DDDD_1.jpeg'] },
+            { title: 'DDDD Book', caption: 'Editorial Coordinator and Contributing Author for Daily Dense Dance Desiderio (DDDD) by Riccardo Benassi, 2024', project: 'dddd book', files: ['DDDDBook_1.jpeg', 'DDDDBook_2.jpeg'] },
+            { title: 'Danceflorensick', caption: 'Camera and Production Assistant for Danceflorensick by Riccardo Benassi, 2022', project: 'danceflorensick', files: ['Danceflosensick_1.jpeg'] },
+            { title: 'Deviante', caption: 'Magazine Cover Design for Deviante, 2024', project: 'deviante', files: ['Deviante.jpg'] },
+            { title: 'First Sight', caption: 'Photography and Book Design for First Sight, 2025', project: 'first sight', files: ['FirstSight_1.jpeg'] },
+            { title: 'Flash Art', caption: 'Graphic Design for Casa Flash Art by Chiara Belardi, 2023', project: 'flash art', files: ['FlashArt_1.jpeg', 'FlashArt_2.jpeg'] },
+            { title: 'Frey Barth', caption: 'Freelance Junior Graphic Designer for Carina Frey and Stefanie Barth, 2025-6', project: 'frey barth', files: ['FreyBarth_1.jpeg', 'FreyBarth_2.jpeg'] },
+            { title: 'Hyper Inertia', caption: 'Editorial Art Direction and Graphic Design with Francesca Barizza for Deviante, 2024', project: 'hyper inertia', files: ['HyperInertia_1.jpeg', 'HyperInertia_2.jpeg', 'HyperInertia_3.jpeg'] },
+            { title: 'KV ROES', caption: 'Head of Communication and Graphic Design for Kv Roes, 2024 ongoing', project: 'kv roes', files: ['KvRoes_3.jpeg', 'KvRoes_4.jpeg', 'KvRoes_5.jpeg', 'KvRoes_7.jpeg', 'KvRoes_8.jpeg', 'KvRoes_9.jpeg'] },
+            { title: 'Maquette', caption: 'Visual Identity and Art Direction for Maquette with Pepe Spike Studio, 2026', project: 'maquette', files: ['Maquette_.jpeg', 'Maquette_1.jpeg', 'Maquette_10.jpeg', 'Maquette_11.jpeg', 'Maquette_2.jpeg', 'Maquette_3.jpeg', 'Maquette_4.jpeg', 'Maquette_5.jpeg', 'Maquette_6.jpeg', 'Maquette_8.jpeg', 'Maquette_9.jpeg'] },
+            { title: 'Process', caption: 'Pics from Design process', project: 'process', files: ['Process_2.jpeg', 'Process_3.jpeg'] },
+            { title: 'Radio Spugna', caption: 'Creative Director of radio spugna, 2024–2026', project: 'radio spugna', files: ['RadioSpugna_2.jpeg', 'RadioSpugna_3.jpeg', 'RadioSpugna_4.jpeg', 'RadioSpugna_6.jpeg'] },
+            { title: 'Radio Spugna Book', caption: 'Book Design and Art director of radio spugna, il libro-manuale, 2025', project: 'radio spugna book', files: ['RadioSpugnaBook_1.jpeg', 'RadioSpugnaBook_2.jpeg', 'RadioSpugnaBook_5.jpeg'] },
+            { title: 'Senza titolo (autoritratto per travasi)', caption: 'Senza titolo (autoritratto per travasi), performance, 2018', files: ['SenzaTitolo(autoritrattopertravasi).jpeg'] },
+            { title: 'Soft Crash', caption: 'Art Direction and Book Design of Soft Crash, 2022', project: 'soft crash', files: ['SoftCrash_1.jpeg', 'SoftCrash_2.jpeg'] },
+            { title: 'A.G. Fronzoni', caption: 'Graphic Design for AG Fronzoni. Il progetto tra il bianco e il nero, 2024', project: 'ag fronzoni', files: ['agfronzoni_1.jpeg', 'agfronzoni_4.jpeg', 'agfronzoni_5.jpeg', 'agfronzoni_6.jpeg'] },
+            { title: 'Y', caption: 'Art Direction and Book Design of Y, 2025', project: 'y', files: ['y_1.jpeg', 'y_2.jpeg'] },
+        ].flatMap(({ title, caption, project, files }) => files.map(file => ({
+            type: 'image',
+            src: `images/${file}`,
+            title,
+            caption,
+            project,
+        })));
 
         const DESKTOP_BREAKPOINT = 841;
 
@@ -102,6 +107,7 @@
             if (item.type === 'image') {
                 el = document.createElement('img');
                 el.alt = item.title || 'Portfolio image';
+                el.src = item.src;
             } else {
                 el = document.createElement('video');
                 el.loop = true;
@@ -119,26 +125,25 @@
         // Carica ogni file UNA SOLA VOLTA: lo stesso elemento creato qui
         // serve sia per rilevare l'orientamento sia per essere mostrato in pagina
         // (niente doppio download come nella versione precedente).
-        function loadItem(item, index) {
-            return new Promise(resolve => {
-                const el = buildMediaElement(item);
-                const finish = (orientation) => resolve({ ...item, el, orientation });
+        function loadItem(item) {
+            const el = buildMediaElement(item);
+            if (item.type !== 'image') {
+                return Promise.resolve({ ...item, el, orientation: 'unknown' });
+            }
 
-                if (item.type === 'image') {
-                    el.onload = () => finish(el.naturalWidth >= el.naturalHeight ? 'landscape' : 'portrait');
-                    el.onerror = () => finish('landscape');
-                    if (index === 0) {
-                        // Dai priorità al primo elemento visibile.
-                        el.fetchPriority = 'high';
-                    } else {
-                        el.loading = 'eager'; // sono comunque tutte "in viewport", meglio essere espliciti
-                    }
-                    el.src = item.src;
+            return new Promise(resolve => {
+                const finishLoading = () => {
+                    const orientation = !el.naturalWidth || !el.naturalHeight
+                        ? 'unknown'
+                        : el.naturalHeight > el.naturalWidth ? 'portrait' : 'landscape';
+                    resolve({ ...item, el, orientation });
+                };
+
+                if (el.complete) {
+                    finishLoading();
                 } else {
-                    el.onloadedmetadata = () => finish(el.videoWidth >= el.videoHeight ? 'landscape' : 'portrait');
-                    el.onerror = () => finish('landscape');
-                    el.querySelector('source').src = item.src;
-                    el.load();
+                    el.addEventListener('load', finishLoading, { once: true });
+                    el.addEventListener('error', finishLoading, { once: true });
                 }
             });
         }
@@ -146,8 +151,97 @@
         function createCaptionElement(item) {
             const cap = document.createElement('div');
             cap.className = 'slide-caption';
-            cap.textContent = item.title || '';
+            cap.textContent = item.caption || item.title || '';
             return cap;
+        }
+
+        const contrastCanvas = document.createElement('canvas');
+        const contrastContext = contrastCanvas.getContext('2d', { willReadFrequently: true });
+
+        function relativeLuminance(red, green, blue) {
+            const linearize = value => {
+                const channel = value / 255;
+                return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+            };
+            return 0.2126 * linearize(red) + 0.7152 * linearize(green) + 0.0722 * linearize(blue);
+        }
+
+        function needsDifferenceCaption(caption) {
+            const image = caption.parentElement.querySelector('img.slide-media');
+            if (!contrastContext || !image?.complete || !image.naturalWidth || !image.naturalHeight) return false;
+
+            const imageRect = image.getBoundingClientRect();
+            const captionRect = caption.getBoundingClientRect();
+            const width = Math.max(1, Math.round(imageRect.width));
+            const height = Math.max(1, Math.round(imageRect.height));
+            if (!captionRect.width || !captionRect.height || !width || !height) return false;
+
+            try {
+                contrastCanvas.width = width;
+                contrastCanvas.height = height;
+                contrastContext.fillStyle = 'white';
+                contrastContext.fillRect(0, 0, width, height);
+
+                const style = getComputedStyle(image);
+                const scale = style.objectFit === 'cover'
+                    ? Math.max(width / image.naturalWidth, height / image.naturalHeight)
+                    : Math.min(width / image.naturalWidth, height / image.naturalHeight);
+                const drawnWidth = image.naturalWidth * scale;
+                const drawnHeight = image.naturalHeight * scale;
+                const [horizontal = '50%', vertical = '50%'] = style.objectPosition.split(' ');
+                const positionFraction = (value, start, end) => {
+                    if (value === start) return 0;
+                    if (value === end) return 1;
+                    if (value === 'center') return 0.5;
+                    const percentage = Number.parseFloat(value);
+                    return Number.isFinite(percentage) ? percentage / 100 : 0.5;
+                };
+                const offsetX = (width - drawnWidth) * positionFraction(horizontal, 'left', 'right');
+                const offsetY = (height - drawnHeight) * positionFraction(vertical, 'top', 'bottom');
+                contrastContext.drawImage(image, offsetX, offsetY, drawnWidth, drawnHeight);
+
+                const left = Math.max(0, Math.floor(captionRect.left - imageRect.left));
+                const top = Math.max(0, Math.floor(captionRect.top - imageRect.top));
+                const right = Math.min(width, Math.ceil(captionRect.right - imageRect.left));
+                const bottom = Math.min(height, Math.ceil(captionRect.bottom - imageRect.top));
+                if (right <= left || bottom <= top) return false;
+
+                const pixels = contrastContext.getImageData(0, 0, width, height).data;
+                const columns = Math.min(11, Math.max(1, Math.ceil((right - left) / 18)));
+                const rows = Math.min(5, Math.max(1, Math.ceil((bottom - top) / 12)));
+                let blackReadable = 0;
+                let differenceReadable = 0;
+                let samples = 0;
+
+                for (let row = 0; row < rows; row++) {
+                    for (let column = 0; column < columns; column++) {
+                        const x = Math.min(width - 1, Math.floor(left + (column + 0.5) * (right - left) / columns));
+                        const y = Math.min(height - 1, Math.floor(top + (row + 0.5) * (bottom - top) / rows));
+                        const offset = (y * width + x) * 4;
+                        const red = pixels[offset];
+                        const green = pixels[offset + 1];
+                        const blue = pixels[offset + 2];
+                        const background = relativeLuminance(red, green, blue);
+                        const inverted = relativeLuminance(255 - red, 255 - green, 255 - blue);
+                        const blackContrast = (background + 0.05) / 0.05;
+                        const differenceContrast = (Math.max(background, inverted) + 0.05) / (Math.min(background, inverted) + 0.05);
+
+                        if (blackContrast >= 4.5) blackReadable++;
+                        if (differenceContrast >= 4.5) differenceReadable++;
+                        samples++;
+                    }
+                }
+
+                return blackReadable < samples * 0.75 && differenceReadable > blackReadable;
+            } catch {
+                return false;
+            }
+        }
+
+        function updateSlideCaptionContrast(slide) {
+            slide?.querySelectorAll('.slide-caption').forEach(caption => {
+                caption.classList.toggle('needs-contrast', needsDifferenceCaption(caption));
+            });
         }
 
         function shuffle(arr) {
@@ -159,9 +253,7 @@
             return a;
         }
 
-        // Raggruppa per "project": dentro ogni progetto abbina i verticali
-        // consecutivi a due a due. Immagini di progetti diversi non vengono MAI
-        // messe nella stessa coppia.
+        // Abbina solo immagini verticali dello stesso progetto; le altre restano singole.
         function buildBlocksFromProjects(items) {
             const byProject = new Map();
             items.forEach(item => {
@@ -172,18 +264,13 @@
 
             const blocks = [];
             byProject.forEach(group => {
-                let i = 0;
-                while (i < group.length) {
-                    const curr = group[i];
-                    const next = group[i + 1];
-                    if (curr.orientation === 'portrait' && next && next.orientation === 'portrait') {
-                        blocks.push([curr, next]);
-                        i += 2;
-                    } else {
-                        blocks.push([curr]);
-                        i += 1;
-                    }
+                const verticals = group.filter(item => item.orientation === 'portrait');
+                const others = group.filter(item => item.orientation !== 'portrait');
+
+                for (let i = 0; i < verticals.length; i += 2) {
+                    blocks.push(verticals.slice(i, i + 2));
                 }
+                others.forEach(item => blocks.push([item]));
             });
             return blocks;
         }
@@ -202,6 +289,11 @@
         function renderSlides(groups) {
             const container = document.getElementById('slideshow');
             container.innerHTML = '';
+
+            const whiteFade = document.createElement('div');
+            whiteFade.className = 'white-fade';
+            container.appendChild(whiteFade);
+
             groups.forEach(group => {
                 const slide = document.createElement('div');
                 slide.className = 'slide';
@@ -227,12 +319,15 @@
         }
 
         const HOLD_MS = 4000;
-        const FADE_MS = 1000;
-        const GAP_MS = 800;
+        const FADE_MS = 1200;
+        const GAP_MS = 0;
 
         let current = 0;
         let slides = [];
         let slideshowRunning = false;
+        const TRANSITION_MS = 1200;
+        let transitionTimerId = null;
+        let whiteFadeTimerId = null;
 
         function getMediaEls(slide) {
             return Array.from(slide.querySelectorAll('.slide-media'));
@@ -251,20 +346,55 @@
             });
         }
 
+        function triggerWhiteFade() {
+            const whiteFade = document.querySelector('.white-fade');
+            if (!whiteFade) return;
+            clearTimeout(whiteFadeTimerId);
+            whiteFade.classList.remove('active');
+            void whiteFade.offsetWidth;
+            whiteFade.classList.add('active');
+            whiteFadeTimerId = setTimeout(() => whiteFade.classList.remove('active'), 220);
+        }
+
+        function goToSlide(delta) {
+            if (!slides.length || !slideshowRunning || transitionTimerId) return;
+
+            clearTimeout(slideshowTimeoutId);
+            clearTimeout(fadeTimeoutId);
+
+            const currentSlide = slides[current];
+            current = (current + delta + slides.length) % slides.length;
+            const nextSlide = slides[current];
+            if (!currentSlide || !nextSlide) return;
+
+            current -= delta;
+            currentSlide.classList.remove('active');
+            pauseVideos(currentSlide);
+
+            transitionTimerId = setTimeout(() => {
+                current = (current + delta + slides.length) % slides.length;
+                triggerWhiteFade();
+                nextSlide.classList.add('active');
+                updateSlideCaptionContrast(nextSlide);
+                playVideos(nextSlide);
+                transitionTimerId = setTimeout(() => {
+                    transitionTimerId = null;
+                    if (slideshowRunning) {
+                        slideshowTimeoutId = setTimeout(() => goToSlide(1), HOLD_MS);
+                    }
+                }, 220);
+            }, TRANSITION_MS);
+        }
+
         function runSlideshow() {
             if (slides.length === 0 || !slideshowRunning) return;
             const slide = slides[current];
             slide.classList.add('active');
+            updateSlideCaptionContrast(slide);
             playVideos(slide);
 
             slideshowTimeoutId = setTimeout(() => {
-                slide.classList.remove('active');
-                pauseVideos(slide);
-
-                fadeTimeoutId = setTimeout(() => {
-                    current = (current + 1) % slides.length;
-                    runSlideshow();
-                }, FADE_MS + GAP_MS);
+                goToSlide(1);
             }, HOLD_MS);
         }
 
@@ -272,6 +402,9 @@
             slideshowRunning = false;
             clearTimeout(slideshowTimeoutId);
             clearTimeout(fadeTimeoutId);
+            clearTimeout(transitionTimerId);
+            clearTimeout(whiteFadeTimerId);
+            transitionTimerId = null;
 
             slides.forEach(slide => {
                 slide.classList.remove('active');
@@ -307,13 +440,36 @@
 
                 stopSlideshow();
                 startSlideshow(); // rigenera i gruppi (gli elementi sono già in cache, non si ricaricano)
+            } else {
+                updateSlideCaptionContrast(slides[current]);
             }
         });
 
-        // --- CLICCARE IN QUALSIASI PUNTO PORTA ALLA PAGINA ABOUT ---
-        document.addEventListener('click', function(event) {
+        const slideshowContainer = document.getElementById('slideshow');
+        let lastTapTime = 0;
+
+        function handleSlideNavigation(event) {
             if (event.target.closest('a')) return;
-            window.location.href = 'about.html';
+
+            const now = Date.now();
+            if (now - lastTapTime < 350) return;
+            lastTapTime = now;
+
+            const point = event.touches?.[0] || event.changedTouches?.[0] || event;
+            const rect = slideshowContainer.getBoundingClientRect();
+            const x = point.clientX - rect.left;
+            if (x < rect.width / 2) {
+                goToSlide(-1);
+            } else {
+                goToSlide(1);
+            }
+
+            if (event.type === 'touchstart') event.preventDefault();
+        }
+
+        slideshowContainer.addEventListener('touchstart', handleSlideNavigation, { passive: false });
+        slideshowContainer.addEventListener('pointerdown', event => {
+            if (event.pointerType !== 'touch') handleSlideNavigation(event);
         });
 
     </script>
