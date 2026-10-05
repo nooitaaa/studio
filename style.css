@@ -275,10 +275,14 @@ body.desktop-mode .slide-media {
 
   .slideshow-container.fullscreen {
     height: 100vh;
+    height: 100dvh;
   }
   .slideshow-caption {
-    left: 10px;
-    font-size: 20px;
+    left: 12px;
+    right: 12px;
+    font-size: 26px;
+    line-height: 1.0;
+    max-width: 88%;
   }
   .video-toggle { pointer-events: none; }
 
