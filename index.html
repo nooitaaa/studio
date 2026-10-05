@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Noa Merlini</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2026-10-05-1">
 
     <style>
       /* --- Regole applicate SOLO su schermi piccoli (Mobile o Desktop stretto). --- */
@@ -107,7 +107,10 @@
             if (item.type === 'image') {
                 el = document.createElement('img');
                 el.alt = item.title || 'Portfolio image';
-                el.src = item.src;
+                el.loading = 'lazy';
+                el.decoding = 'async';
+                el.dataset.src = item.src;
+                el.src = '';
             } else {
                 el = document.createElement('video');
                 el.loop = true;
@@ -130,6 +133,8 @@
             if (item.type !== 'image') {
                 return Promise.resolve({ ...item, el, orientation: 'unknown' });
             }
+
+            el.src = item.src;
 
             return new Promise(resolve => {
                 const finishLoading = () => {
@@ -264,13 +269,9 @@
 
             const blocks = [];
             byProject.forEach(group => {
-                const verticals = group.filter(item => item.orientation === 'portrait');
-                const others = group.filter(item => item.orientation !== 'portrait');
-
-                for (let i = 0; i < verticals.length; i += 2) {
-                    blocks.push(verticals.slice(i, i + 2));
+                for (let i = 0; i < group.length; i += 2) {
+                    blocks.push(group.slice(i, i + 2));
                 }
-                others.forEach(item => blocks.push([item]));
             });
             return blocks;
         }
@@ -301,11 +302,17 @@
                 if (group.length === 2) {
                     const pair = document.createElement('div');
                     pair.className = 'slide-pair';
-                    group.forEach(item => {
+                    const sameCaption = group[0].caption && group[0].caption === group[1].caption;
+
+                    group.forEach((item, index) => {
                         const half = document.createElement('div');
                         half.className = 'pair-half';
                         half.appendChild(item.el);
-                        half.appendChild(createCaptionElement(item));
+
+                        if (!(sameCaption && index === 1)) {
+                            half.appendChild(createCaptionElement(item));
+                        }
+
                         pair.appendChild(half);
                     });
                     slide.appendChild(pair);
@@ -331,6 +338,14 @@
 
         function getMediaEls(slide) {
             return Array.from(slide.querySelectorAll('.slide-media'));
+        }
+        function ensureSlideMediaLoaded(slide) {
+            if (!slide) return;
+            getMediaEls(slide).forEach(media => {
+                if (media.tagName === 'IMG' && media.dataset.src && !media.getAttribute('src')) {
+                    media.src = media.dataset.src;
+                }
+            });
         }
         function playVideos(slide) {
             getMediaEls(slide).forEach(media => {
@@ -374,6 +389,7 @@
             transitionTimerId = setTimeout(() => {
                 current = (current + delta + slides.length) % slides.length;
                 triggerWhiteFade();
+                ensureSlideMediaLoaded(nextSlide);
                 nextSlide.classList.add('active');
                 updateSlideCaptionContrast(nextSlide);
                 playVideos(nextSlide);
@@ -389,6 +405,7 @@
         function runSlideshow() {
             if (slides.length === 0 || !slideshowRunning) return;
             const slide = slides[current];
+            ensureSlideMediaLoaded(slide);
             slide.classList.add('active');
             updateSlideCaptionContrast(slide);
             playVideos(slide);
@@ -413,10 +430,9 @@
         }
 
         // --- AVVIO E RIDIMENSIONAMENTO ---
-        async function startSlideshow() {
-            // Carica (una sola volta) tutti i file e rileva il loro orientamento.
+        function startSlideshow() {
             if (preparedItems.length === 0) {
-                preparedItems = await Promise.all(MEDIA_LIST.map((item, idx) => loadItem(item, idx)));
+                preparedItems = MEDIA_LIST.map(item => ({ ...item, el: buildMediaElement(item), orientation: 'unknown' }));
             }
 
             const groups = buildGroups();
@@ -425,7 +441,7 @@
 
             current = 0;
             slideshowRunning = true;
-            runSlideshow();
+            slideshowTimeoutId = setTimeout(runSlideshow, 500);
         }
 
         startSlideshow();
