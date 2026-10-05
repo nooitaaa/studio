@@ -87,6 +87,7 @@
 
         // Elementi già caricati (con orientamento rilevato), popolati una sola volta.
         let preparedItems = [];
+        let slideshowGeneration = 0;
         // Ordine mescolato dei "blocchi" (singoli o coppie di stesso progetto),
         // calcolato una sola volta per sessione/pagina.
         let shuffledBlocks = null;
@@ -134,6 +135,7 @@
                 return Promise.resolve({ ...item, el, orientation: 'unknown' });
             }
 
+            el.loading = 'eager';
             el.src = item.src;
 
             return new Promise(resolve => {
@@ -269,9 +271,13 @@
 
             const blocks = [];
             byProject.forEach(group => {
-                for (let i = 0; i < group.length; i += 2) {
-                    blocks.push(group.slice(i, i + 2));
+                const verticals = group.filter(item => item.orientation === 'portrait');
+                const others = group.filter(item => item.orientation !== 'portrait');
+
+                for (let i = 0; i < verticals.length; i += 2) {
+                    blocks.push(verticals.slice(i, i + 2));
                 }
+                others.forEach(item => blocks.push([item]));
             });
             return blocks;
         }
@@ -340,12 +346,21 @@
             return Array.from(slide.querySelectorAll('.slide-media'));
         }
         function ensureSlideMediaLoaded(slide) {
-            if (!slide) return;
-            getMediaEls(slide).forEach(media => {
-                if (media.tagName === 'IMG' && media.dataset.src && !media.getAttribute('src')) {
-                    media.src = media.dataset.src;
+            if (!slide) return Promise.resolve();
+            const images = getMediaEls(slide).filter(media => media.tagName === 'IMG');
+            images.forEach(image => {
+                image.loading = 'eager';
+                if (image.dataset.src && !image.getAttribute('src')) {
+                    image.src = image.dataset.src;
                 }
             });
+            return Promise.all(images.map(image => {
+                if (image.complete) return Promise.resolve();
+                return new Promise(resolve => {
+                    image.addEventListener('load', resolve, { once: true });
+                    image.addEventListener('error', resolve, { once: true });
+                });
+            }));
         }
         function playVideos(slide) {
             getMediaEls(slide).forEach(media => {
@@ -378,16 +393,43 @@
             clearTimeout(fadeTimeoutId);
 
             const currentSlide = slides[current];
-            current = (current + delta + slides.length) % slides.length;
-            const nextSlide = slides[current];
+            const nextIndex = (current + delta + slides.length) % slides.length;
+            const nextSlide = slides[nextIndex];
             if (!currentSlide || !nextSlide) return;
 
-            current -= delta;
+            if (!isDesktopState) {
+                const imageReady = ensureSlideMediaLoaded(nextSlide);
+                currentSlide.classList.remove('active');
+                pauseVideos(currentSlide);
+                transitionTimerId = setTimeout(() => {
+                    imageReady.then(() => {
+                        if (!slideshowRunning || slides[current] !== currentSlide) {
+                            transitionTimerId = null;
+                            return;
+                        }
+
+                        current = nextIndex;
+                        triggerWhiteFade();
+                        nextSlide.classList.add('active');
+                        updateSlideCaptionContrast(nextSlide);
+                        playVideos(nextSlide);
+                        ensureSlideMediaLoaded(slides[(current + 1) % slides.length]);
+                        transitionTimerId = setTimeout(() => {
+                            transitionTimerId = null;
+                            if (slideshowRunning) {
+                                slideshowTimeoutId = setTimeout(() => goToSlide(1), HOLD_MS);
+                            }
+                        }, 220);
+                    });
+                }, TRANSITION_MS);
+                return;
+            }
+
             currentSlide.classList.remove('active');
             pauseVideos(currentSlide);
 
             transitionTimerId = setTimeout(() => {
-                current = (current + delta + slides.length) % slides.length;
+                current = nextIndex;
                 triggerWhiteFade();
                 ensureSlideMediaLoaded(nextSlide);
                 nextSlide.classList.add('active');
@@ -405,17 +447,28 @@
         function runSlideshow() {
             if (slides.length === 0 || !slideshowRunning) return;
             const slide = slides[current];
-            ensureSlideMediaLoaded(slide);
-            slide.classList.add('active');
-            updateSlideCaptionContrast(slide);
-            playVideos(slide);
+            const showSlide = () => {
+                slide.classList.add('active');
+                updateSlideCaptionContrast(slide);
+                playVideos(slide);
+                if (!isDesktopState && slides.length > 1) {
+                    ensureSlideMediaLoaded(slides[(current + 1) % slides.length]);
+                }
+                slideshowTimeoutId = setTimeout(() => goToSlide(1), HOLD_MS);
+            };
 
-            slideshowTimeoutId = setTimeout(() => {
-                goToSlide(1);
-            }, HOLD_MS);
+            if (!isDesktopState) {
+                ensureSlideMediaLoaded(slide).then(() => {
+                    if (slideshowRunning && slides[current] === slide) showSlide();
+                });
+            } else {
+                ensureSlideMediaLoaded(slide);
+                showSlide();
+            }
         }
 
         function stopSlideshow() {
+            slideshowGeneration++;
             slideshowRunning = false;
             clearTimeout(slideshowTimeoutId);
             clearTimeout(fadeTimeoutId);
@@ -430,10 +483,19 @@
         }
 
         // --- AVVIO E RIDIMENSIONAMENTO ---
-        function startSlideshow() {
-            if (preparedItems.length === 0) {
-                preparedItems = MEDIA_LIST.map(item => ({ ...item, el: buildMediaElement(item), orientation: 'unknown' }));
+        async function startSlideshow() {
+            const generation = ++slideshowGeneration;
+            if (preparedItems.length === 0 || (isDesktopState && preparedItems.some(item => item.orientation === 'unknown'))) {
+                const items = isDesktopState
+                    ? await Promise.all(MEDIA_LIST.map(item => loadItem(item)))
+                    : MEDIA_LIST.map(item => ({ ...item, el: buildMediaElement(item), orientation: 'unknown' }));
+
+                if (generation !== slideshowGeneration) return;
+                preparedItems = items;
+                shuffledBlocks = null;
             }
+
+            if (generation !== slideshowGeneration) return;
 
             const groups = buildGroups();
             renderSlides(groups);
