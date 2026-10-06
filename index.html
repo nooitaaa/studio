@@ -4,50 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Noa Merlini</title>
-    <link rel="stylesheet" href="style.css?v=2026-10-05-2">
+    <link rel="stylesheet" href="style.css?v=2026-10-06-1">
 
-    <style>
-      /* --- Regole applicate SOLO su schermi piccoli (Mobile o Desktop stretto). --- */
-      @media (max-width: 840px) {
-          .slide {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-          }
-
-          .slide-caption {
-              position: absolute !important;
-              bottom: 50px !important;
-              left: 20px !important;
-              margin: 0 !important;
-              color: black;
-              mix-blend-mode: normal;
-              font-family: "Times New Roman", Times, serif;
-              font-size: 15px;
-              line-height: 1.0;
-              z-index: 6 !important;
-              pointer-events: none;
-          }
-      }
-    </style>
   </head>
 
   <body class="homepage">
+        <audio id="site-radio-audio" preload="none" hidden></audio>
+        <div id="page-content">
 
     <div class="slideshow-container fullscreen" id="slideshow"></div>
 
     <a href="about.html" class="slideshow-caption">
         Noa Merlini<br>
         Graphic Design and Creative development<br><br>
-        Via Bernardino Verro 41, <br>Milan (Italy)
+        Via Bernardino Verro 41 <br>Milan (Italy)
     </a>
 
-    <script>
+        <script>
+            (() => {
         // Aggiungi il campo "project" con lo STESSO valore alle immagini
         // verticali che vuoi vedere sempre abbinate tra loro (stesso progetto).
         // Le immagini senza "project" (o con project diverso dalle altre)
@@ -57,20 +31,20 @@
             { title: 'DDDD', caption: 'Editorial and Production Assistant for Daily Dense Dance Desiderio (DDDD) by Riccardo Benassi, 2021', project: 'dddd', files: ['DDDD_1.jpeg'] },
             { title: 'DDDD Book', caption: 'Editorial Coordinator and Contributing Author for Daily Dense Dance Desiderio (DDDD) by Riccardo Benassi, 2024', project: 'dddd book', files: ['DDDDBook_1.jpeg', 'DDDDBook_2.jpeg'] },
             { title: 'Danceflorensick', caption: 'Camera and Production Assistant for Danceflorensick by Riccardo Benassi, 2022', project: 'danceflorensick', files: ['Danceflosensick_1.jpeg'] },
-            { title: 'Deviante', caption: 'Magazine Cover Design for Deviante, 2024', project: 'deviante', files: ['Deviante.jpg'] },
-            { title: 'First Sight', caption: 'Photography and Book Design for First Sight, 2025', project: 'first sight', files: ['FirstSight_1.jpeg'] },
-            { title: 'Flash Art', caption: 'Graphic Design for Casa Flash Art by Chiara Belardi, 2023', project: 'flash art', files: ['FlashArt_1.jpeg', 'FlashArt_2.jpeg'] },
+            { title: 'Deviante', caption: 'Magazine cover design for Deviante, 2024', project: 'deviante', files: ['Deviante.jpg'] },
+            { title: 'First Sight', caption: 'Photography and book design for First Sight, 2025', project: 'first sight', files: ['FirstSight_1.jpeg'] },
+            { title: 'Flash Art', caption: 'Graphic design for Casa Flash Art by Chiara Belardi, 2023', project: 'flash art', files: ['FlashArt_1.jpeg', 'FlashArt_2.jpeg'] },
             { title: 'Frey Barth', caption: 'Freelance Junior Graphic Designer for Carina Frey and Stefanie Barth, 2025-6', project: 'frey barth', files: ['FreyBarth_1.jpeg', 'FreyBarth_2.jpeg'] },
             { title: 'Hyper Inertia', caption: 'Editorial Art Direction and Graphic Design with Francesca Barizza for Deviante, 2024', project: 'hyper inertia', files: ['HyperInertia_1.jpeg', 'HyperInertia_2.jpeg', 'HyperInertia_3.jpeg'] },
             { title: 'KV ROES', caption: 'Head of Communication and Graphic Design for Kv Roes, 2024 ongoing', project: 'kv roes', files: ['KvRoes_3.jpeg', 'KvRoes_4.jpeg', 'KvRoes_5.jpeg', 'KvRoes_7.jpeg', 'KvRoes_8.jpeg', 'KvRoes_9.jpeg'] },
             { title: 'Maquette', caption: 'Visual Identity and Art Direction for Maquette with Pepe Spike Studio, 2026', project: 'maquette', files: ['Maquette_.jpeg', 'Maquette_1.jpeg', 'Maquette_10.jpeg', 'Maquette_11.jpeg', 'Maquette_2.jpeg', 'Maquette_3.jpeg', 'Maquette_4.jpeg', 'Maquette_5.jpeg', 'Maquette_6.jpeg', 'Maquette_8.jpeg', 'Maquette_9.jpeg'] },
             { title: 'Process', caption: 'Pics from Design process', project: 'process', files: ['Process_2.jpeg', 'Process_3.jpeg'] },
-            { title: 'Radio Spugna', caption: 'Creative Director of radio spugna, 2024–2026', project: 'radio spugna', files: ['RadioSpugna_2.jpeg', 'RadioSpugna_3.jpeg', 'RadioSpugna_4.jpeg', 'RadioSpugna_6.jpeg'] },
+            { title: 'Radio Spugna', caption: 'Creative Development of radio spugna, 2024–2026', project: 'radio spugna', files: ['RadioSpugna_2.jpeg', 'RadioSpugna_3.jpeg', 'RadioSpugna_4.jpeg', 'RadioSpugna_6.jpeg'] },
             { title: 'Radio Spugna Book', caption: 'Book Design and Art director of radio spugna, il libro-manuale, 2025', project: 'radio spugna book', files: ['RadioSpugnaBook_1.jpeg', 'RadioSpugnaBook_2.jpeg', 'RadioSpugnaBook_5.jpeg'] },
             { title: 'Senza titolo (autoritratto per travasi)', caption: 'Senza titolo (autoritratto per travasi), performance, 2018', files: ['SenzaTitolo(autoritrattopertravasi).jpeg'] },
-            { title: 'Soft Crash', caption: 'Art Direction and Book Design of Soft Crash, 2022', project: 'soft crash', files: ['SoftCrash_1.jpeg', 'SoftCrash_2.jpeg'] },
-            { title: 'A.G. Fronzoni', caption: 'Graphic Design for AG Fronzoni. Il progetto tra il bianco e il nero, 2024', project: 'ag fronzoni', files: ['agfronzoni_1.jpeg', 'agfronzoni_4.jpeg', 'agfronzoni_5.jpeg', 'agfronzoni_6.jpeg'] },
-            { title: 'Y', caption: 'Art Direction and Book Design of Y, 2025', project: 'y', files: ['y_1.jpeg', 'y_2.jpeg'] },
+            { title: 'Soft Crash', caption: 'Art direction and book design of Soft Crash, 2022', project: 'soft crash', files: ['SoftCrash_1.jpeg', 'SoftCrash_2.jpeg'] },
+            { title: 'A.G. Fronzoni', caption: 'Graphic design for AG Fronzoni. Il progetto tra il bianco e il nero with Pepe Spike Studio, 2024', project: 'ag fronzoni', files: ['agfronzoni_1.jpeg', 'agfronzoni_4.jpeg', 'agfronzoni_5.jpeg', 'agfronzoni_6.jpeg'] },
+            { title: 'Y', caption: 'Art direction and book design of Y, 2025', project: 'y', files: ['y_1.jpeg', 'y_2.jpeg'] },
         ].flatMap(({ title, caption, project, files }) => files.map(file => ({
             type: 'image',
             src: `images/${file}`,
@@ -162,6 +136,36 @@
             return cap;
         }
 
+        const captionMeasureContext = document.createElement('canvas').getContext('2d');
+
+        function formatSharedCaption(caption) {
+            const words = caption.textContent.trim().split(/\s+/);
+            if (!captionMeasureContext || !words.length) return;
+
+            captionMeasureContext.font = getComputedStyle(caption).font;
+            const availableWidth = caption.clientWidth;
+            let firstLineWordCount = 0;
+
+            for (const word of words) {
+                const candidate = [...words.slice(0, firstLineWordCount), word].join(' ');
+                if (firstLineWordCount && captionMeasureContext.measureText(candidate).width > availableWidth) break;
+                firstLineWordCount++;
+            }
+
+            const firstLine = document.createElement('span');
+            firstLine.className = 'shared-caption-first-line';
+            firstLine.textContent = words.slice(0, firstLineWordCount).join(' ');
+            caption.replaceChildren(firstLine);
+
+            const continuation = words.slice(firstLineWordCount).join(' ');
+            if (continuation) {
+                const rest = document.createElement('span');
+                rest.className = 'shared-caption-continuation';
+                rest.textContent = continuation;
+                caption.appendChild(rest);
+            }
+        }
+
         const contrastCanvas = document.createElement('canvas');
         const contrastContext = contrastCanvas.getContext('2d', { willReadFrequently: true });
 
@@ -173,82 +177,105 @@
             return 0.2126 * linearize(red) + 0.7152 * linearize(green) + 0.0722 * linearize(blue);
         }
 
-        function needsDifferenceCaption(caption) {
-            const image = caption.parentElement.querySelector('img.slide-media');
-            if (!contrastContext || !image?.complete || !image.naturalWidth || !image.naturalHeight) return false;
-
-            const imageRect = image.getBoundingClientRect();
-            const captionRect = caption.getBoundingClientRect();
-            const width = Math.max(1, Math.round(imageRect.width));
-            const height = Math.max(1, Math.round(imageRect.height));
-            if (!captionRect.width || !captionRect.height || !width || !height) return false;
+        function getCaptionContrastMode(caption, images) {
+            const textLines = [];
+            const walker = document.createTreeWalker(caption, NodeFilter.SHOW_TEXT);
+            while (walker.nextNode()) {
+                if (!walker.currentNode.textContent.trim()) continue;
+                const range = document.createRange();
+                range.selectNodeContents(walker.currentNode);
+                for (const rect of range.getClientRects()) {
+                    if (rect.width && rect.height) {
+                        textLines.push({ rect, lowContrastSamples: 0, veryDarkSamples: 0, samples: 0 });
+                    }
+                }
+            }
+            if (!contrastContext || !textLines.length || !images.length) return null;
 
             try {
-                contrastCanvas.width = width;
-                contrastCanvas.height = height;
-                contrastContext.fillStyle = 'white';
-                contrastContext.fillRect(0, 0, width, height);
+                for (const image of images) {
+                    if (!image.complete || !image.naturalWidth || !image.naturalHeight) continue;
 
-                const style = getComputedStyle(image);
-                const scale = style.objectFit === 'cover'
-                    ? Math.max(width / image.naturalWidth, height / image.naturalHeight)
-                    : Math.min(width / image.naturalWidth, height / image.naturalHeight);
-                const drawnWidth = image.naturalWidth * scale;
-                const drawnHeight = image.naturalHeight * scale;
-                const [horizontal = '50%', vertical = '50%'] = style.objectPosition.split(' ');
-                const positionFraction = (value, start, end) => {
-                    if (value === start) return 0;
-                    if (value === end) return 1;
-                    if (value === 'center') return 0.5;
-                    const percentage = Number.parseFloat(value);
-                    return Number.isFinite(percentage) ? percentage / 100 : 0.5;
-                };
-                const offsetX = (width - drawnWidth) * positionFraction(horizontal, 'left', 'right');
-                const offsetY = (height - drawnHeight) * positionFraction(vertical, 'top', 'bottom');
-                contrastContext.drawImage(image, offsetX, offsetY, drawnWidth, drawnHeight);
+                    const imageRect = image.getBoundingClientRect();
+                    const width = Math.max(1, Math.round(imageRect.width));
+                    const height = Math.max(1, Math.round(imageRect.height));
+                    const overlaps = textLines.map(line => ({
+                        line,
+                        left: Math.max(line.rect.left, imageRect.left),
+                        top: Math.max(line.rect.top, imageRect.top),
+                        right: Math.min(line.rect.right, imageRect.right),
+                        bottom: Math.min(line.rect.bottom, imageRect.bottom),
+                    })).filter(rect => rect.right > rect.left && rect.bottom > rect.top);
+                    if (!overlaps.length) continue;
 
-                const left = Math.max(0, Math.floor(captionRect.left - imageRect.left));
-                const top = Math.max(0, Math.floor(captionRect.top - imageRect.top));
-                const right = Math.min(width, Math.ceil(captionRect.right - imageRect.left));
-                const bottom = Math.min(height, Math.ceil(captionRect.bottom - imageRect.top));
-                if (right <= left || bottom <= top) return false;
+                    contrastCanvas.width = width;
+                    contrastCanvas.height = height;
+                    contrastContext.fillStyle = 'white';
+                    contrastContext.fillRect(0, 0, width, height);
 
-                const pixels = contrastContext.getImageData(0, 0, width, height).data;
-                const columns = Math.min(11, Math.max(1, Math.ceil((right - left) / 18)));
-                const rows = Math.min(5, Math.max(1, Math.ceil((bottom - top) / 12)));
-                let blackReadable = 0;
-                let differenceReadable = 0;
-                let samples = 0;
+                    const style = getComputedStyle(image);
+                    const scale = style.objectFit === 'cover'
+                        ? Math.max(width / image.naturalWidth, height / image.naturalHeight)
+                        : Math.min(width / image.naturalWidth, height / image.naturalHeight);
+                    const drawnWidth = image.naturalWidth * scale;
+                    const drawnHeight = image.naturalHeight * scale;
+                    const [horizontal = '50%', vertical = '50%'] = style.objectPosition.split(' ');
+                    const positionFraction = (value, start, end) => {
+                        if (value === start) return 0;
+                        if (value === end) return 1;
+                        if (value === 'center') return 0.5;
+                        const percentage = Number.parseFloat(value);
+                        return Number.isFinite(percentage) ? percentage / 100 : 0.5;
+                    };
+                    const offsetX = (width - drawnWidth) * positionFraction(horizontal, 'left', 'right');
+                    const offsetY = (height - drawnHeight) * positionFraction(vertical, 'top', 'bottom');
+                    contrastContext.drawImage(image, offsetX, offsetY, drawnWidth, drawnHeight);
 
-                for (let row = 0; row < rows; row++) {
-                    for (let column = 0; column < columns; column++) {
-                        const x = Math.min(width - 1, Math.floor(left + (column + 0.5) * (right - left) / columns));
-                        const y = Math.min(height - 1, Math.floor(top + (row + 0.5) * (bottom - top) / rows));
-                        const offset = (y * width + x) * 4;
-                        const red = pixels[offset];
-                        const green = pixels[offset + 1];
-                        const blue = pixels[offset + 2];
-                        const background = relativeLuminance(red, green, blue);
-                        const inverted = relativeLuminance(255 - red, 255 - green, 255 - blue);
-                        const blackContrast = (background + 0.05) / 0.05;
-                        const differenceContrast = (Math.max(background, inverted) + 0.05) / (Math.min(background, inverted) + 0.05);
+                    const pixels = contrastContext.getImageData(0, 0, width, height).data;
+                    for (const rect of overlaps) {
+                        const left = Math.max(0, Math.floor(rect.left - imageRect.left));
+                        const top = Math.max(0, Math.floor(rect.top - imageRect.top));
+                        const right = Math.min(width, Math.ceil(rect.right - imageRect.left));
+                        const bottom = Math.min(height, Math.ceil(rect.bottom - imageRect.top));
+                        const columns = Math.min(11, Math.max(1, Math.ceil((right - left) / 18)));
+                        const rows = Math.min(3, Math.max(1, Math.ceil((bottom - top) / 8)));
 
-                        if (blackContrast >= 4.5) blackReadable++;
-                        if (differenceContrast >= 4.5) differenceReadable++;
-                        samples++;
+                        for (let row = 0; row < rows; row++) {
+                            for (let column = 0; column < columns; column++) {
+                                const x = Math.min(width - 1, Math.floor(left + (column + 0.5) * (right - left) / columns));
+                                const y = Math.min(height - 1, Math.floor(top + (row + 0.5) * (bottom - top) / rows));
+                                const offset = (y * width + x) * 4;
+                                const background = relativeLuminance(pixels[offset], pixels[offset + 1], pixels[offset + 2]);
+                                const blackContrast = (background + 0.05) / 0.05;
+
+                                if (blackContrast < 4.5) rect.line.lowContrastSamples++;
+                                if (blackContrast < 2) rect.line.veryDarkSamples++;
+                                rect.line.samples++;
+                            }
+                        }
                     }
                 }
 
-                return blackReadable < samples * 0.75 && differenceReadable > blackReadable;
+                if (textLines.some(line => line.samples > 0 && line.veryDarkSamples >= line.samples * 0.8)) {
+                    return 'extreme';
+                }
+                if (textLines.some(line => line.samples > 0 && line.lowContrastSamples >= line.samples * 0.8)) {
+                    return 'difference';
+                }
+                return null;
             } catch {
-                return false;
+                return null;
             }
         }
 
         function updateSlideCaptionContrast(slide) {
+            const images = [...(slide?.querySelectorAll('img.slide-media') || [])];
             slide?.querySelectorAll('.slide-caption').forEach(caption => {
-                caption.classList.toggle('needs-contrast', needsDifferenceCaption(caption));
+                const mode = getCaptionContrastMode(caption, images);
+                caption.classList.toggle('needs-contrast', mode === 'difference');
+                caption.classList.toggle('extreme-contrast', mode === 'extreme');
             });
+            document.querySelector('.slideshow-caption')?.classList.remove('needs-contrast', 'extreme-contrast');
         }
 
         function shuffle(arr) {
@@ -316,7 +343,12 @@
                         half.appendChild(item.el);
 
                         if (!(sameCaption && index === 1)) {
-                            half.appendChild(createCaptionElement(item));
+                            const caption = createCaptionElement(item);
+                            if (sameCaption) {
+                                half.classList.add('pair-half-shared-caption');
+                                caption.classList.add('slide-caption-shared');
+                            }
+                            half.appendChild(caption);
                         }
 
                         pair.appendChild(half);
@@ -328,6 +360,7 @@
                 }
 
                 container.appendChild(slide);
+                slide.querySelectorAll('.slide-caption-shared').forEach(formatSharedCaption);
             });
         }
 
@@ -508,7 +541,7 @@
 
         startSlideshow();
 
-        window.addEventListener('resize', () => {
+        const handleResize = () => {
             const width = window.innerWidth;
             const nowIsDesktop = width >= DESKTOP_BREAKPOINT;
 
@@ -519,9 +552,11 @@
                 stopSlideshow();
                 startSlideshow(); // rigenera i gruppi (gli elementi sono già in cache, non si ricaricano)
             } else {
+                document.querySelectorAll('.slide-caption-shared').forEach(formatSharedCaption);
                 updateSlideCaptionContrast(slides[current]);
             }
-        });
+        };
+        window.addEventListener('resize', handleResize);
 
         const slideshowContainer = document.getElementById('slideshow');
         let lastTapTime = 0;
@@ -546,11 +581,22 @@
         }
 
         slideshowContainer.addEventListener('touchstart', handleSlideNavigation, { passive: false });
-        slideshowContainer.addEventListener('pointerdown', event => {
+        const handlePointerNavigation = event => {
             if (event.pointerType !== 'touch') handleSlideNavigation(event);
-        });
+        };
+        slideshowContainer.addEventListener('pointerdown', handlePointerNavigation);
 
+        window.sitePageCleanup = () => {
+            stopSlideshow();
+            window.removeEventListener('resize', handleResize);
+            slideshowContainer.removeEventListener('touchstart', handleSlideNavigation);
+            slideshowContainer.removeEventListener('pointerdown', handlePointerNavigation);
+            window.sitePageCleanup = null;
+        };
+      })();
     </script>
 
+        </div>
+        <script src="site-router.js"></script>
   </body>
 </html>

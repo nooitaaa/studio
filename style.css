@@ -159,6 +159,10 @@ body.desktop-mode .slide-media {
   height: 100%;
   overflow: hidden;
 }
+.pair-half-shared-caption {
+  overflow: visible;
+  z-index: 1;
+}
 .pair-half .slide-media {
   object-fit: cover;
 }
@@ -177,9 +181,27 @@ body.desktop-mode .slide-media {
   pointer-events: none;
 }
 
+.slide-caption-shared {
+  right: -100%;
+  width: auto;
+}
+.shared-caption-first-line {
+  display: block;
+  white-space: nowrap;
+}
+.shared-caption-continuation {
+  display: block;
+  width: calc(50vw - 100px);
+}
+
 .slide-caption.needs-contrast {
   color: white;
   mix-blend-mode: difference;
+}
+
+.slide-caption.extreme-contrast {
+  color: white;
+  mix-blend-mode: normal;
 }
 
 @media (hover: hover) {
@@ -227,6 +249,46 @@ body.desktop-mode .slide-media {
   flex: 1 1 0;
 }
 
+.about-radio {
+  max-width: 480px;
+  font-size: 15px;
+  line-height: 1;
+}
+.about-radio p {
+  margin: 0;
+}
+.about-radio a {
+  color: inherit;
+}
+
+@media screen and (min-width: 841px) {
+  .about-radio {
+    position: fixed;
+    left: max(10px, calc((100vw - 1200px) / 2 + 10px));
+    bottom: 50px;
+    margin: 0;
+    padding: 0;
+    z-index: 20;
+  }
+}
+.radio-toggle {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+.radio-toggle:hover {
+  opacity: 0.65;
+}
+.radio-toggle:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
+
 .about-columns h2 {
   font-weight: normal;
   font-size: inherit;
@@ -260,6 +322,42 @@ body.desktop-mode .slide-media {
 /* ------------------------------------- */
 
 @media screen and (max-width: 840px) {
+
+  .about-radio {
+    display: none;
+  }
+
+  body.homepage .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body.homepage .slide-caption {
+    position: absolute !important;
+    bottom: 50px !important;
+    left: 20px !important;
+    right: 20px !important;
+    width: auto !important;
+    margin: 0 !important;
+    color: black;
+    mix-blend-mode: normal;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 15px;
+    line-height: 1.0;
+    z-index: 6 !important;
+    pointer-events: none;
+  }
+
+  .colonna-unica {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 
   .footer1 {
     flex-direction: column;

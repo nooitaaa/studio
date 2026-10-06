@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Noa Merlini — About</title>
-    <link rel="stylesheet" href="style.css?v=2026-10-05-1">
+    <link rel="stylesheet" href="style.css?v=2026-10-06-1">
   </head>
 
   <body>
+    <audio id="site-radio-audio" preload="none" hidden></audio>
+    <div id="page-content">
 
     <div class="footer1">
         <div class="header-left">
@@ -42,7 +44,13 @@ Design for Publishing from ISIA Urbino, with a research thesis on camouflage.
         </div>
 
       </div>
+      <div class="about-radio">
+        <p>Noa is now listening to <a id="radio-station" target="_blank" rel="noopener noreferrer"></a>, join her <button id="radio-toggle" class="radio-toggle" type="button" aria-label="Play radio" aria-pressed="false">(play)</button></p>
+      </div>
     </div>
+
+    </div>
+    <script src="site-router.js"></script>
 
   </body>
 </html>
