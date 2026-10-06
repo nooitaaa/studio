@@ -3,19 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Noa Merlini — About</title>
-    <link rel="stylesheet" href="style.css?v=2026-10-06-1">
-    
-    <!-- Aggiungi questa riga per la favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    
-  </head>
-<html lang="it">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Noa Merlini</title>
     <link rel="stylesheet" href="style.css?v=2026-10-06-1">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
 
   </head>
 
@@ -33,10 +25,7 @@
 
         <script>
             (() => {
-        // Aggiungi il campo "project" con lo STESSO valore alle immagini
-        // verticali che vuoi vedere sempre abbinate tra loro (stesso progetto).
-        // Le immagini senza "project" (o con project diverso dalle altre)
-        // non verranno MAI abbinate ad altre: restano sempre singole.
+        // La lista ora rispecchia ESATTAMENTE i nomi dei tuoi file reali
         const MEDIA_LIST = [
             { title: 'Camouflage', caption: 'Camouflage. An Act of conformity and resistance, 2024-5. Research, writing, graphic and book design.', project: 'camouflage', files: ['Camouflage_1.jpeg', 'Camouflage_2.jpeg', 'Camouflage_3.jpeg', 'Camouflage_4.jpeg', 'Camouflage_6.jpeg', 'Camouflage_8.jpeg', 'Camouflage_9.jpeg', 'Camouflage_10.jpeg'] },
             { title: 'DDDD', caption: 'Editorial and Production Assistant for Daily Dense Dance Desiderio (DDDD) by Riccardo Benassi, 2021', project: 'dddd', files: ['DDDD_1.jpeg'] },
@@ -70,11 +59,8 @@
         let fadeTimeoutId = null;
         let isDesktopState = window.innerWidth >= DESKTOP_BREAKPOINT;
 
-        // Elementi già caricati (con orientamento rilevato), popolati una sola volta.
         let preparedItems = [];
         let slideshowGeneration = 0;
-        // Ordine mescolato dei "blocchi" (singoli o coppie di stesso progetto),
-        // calcolato una sola volta per sessione/pagina.
         let shuffledBlocks = null;
 
         function updateBodyClass() {
@@ -111,9 +97,6 @@
             return el;
         }
 
-        // Carica ogni file UNA SOLA VOLTA: lo stesso elemento creato qui
-        // serve sia per rilevare l'orientamento sia per essere mostrato in pagina
-        // (niente doppio download come nella versione precedente).
         function loadItem(item) {
             const el = buildMediaElement(item);
             if (item.type !== 'image') {
@@ -298,7 +281,6 @@
             return a;
         }
 
-        // Abbina solo immagini verticali dello stesso progetto; le altre restano singole.
         function buildBlocksFromProjects(items) {
             const byProject = new Map();
             items.forEach(item => {
@@ -327,7 +309,6 @@
             if (isDesktopState) {
                 return shuffledBlocks;
             }
-            // Mobile: un'immagine per slide, ma mantenendo lo stesso ordine mescolato.
             return shuffledBlocks.flatMap(block => block.map(item => [item]));
         }
 
@@ -526,7 +507,6 @@
             });
         }
 
-        // --- AVVIO E RIDIMENSIONAMENTO ---
         async function startSlideshow() {
             const generation = ++slideshowGeneration;
             if (preparedItems.length === 0 || (isDesktopState && preparedItems.some(item => item.orientation === 'unknown'))) {
@@ -561,7 +541,7 @@
                 updateBodyClass();
 
                 stopSlideshow();
-                startSlideshow(); // rigenera i gruppi (gli elementi sono già in cache, non si ricaricano)
+                startSlideshow();
             } else {
                 document.querySelectorAll('.slide-caption-shared').forEach(formatSharedCaption);
                 updateSlideCaptionContrast(slides[current]);
