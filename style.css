@@ -390,3 +390,39 @@ body.desktop-mode .slide-media {
     gap: 30px;
   }
 }
+
+
+/* Homepage slideshow navigation */
+.slideshow-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+.slide-control {
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  color: white;
+  mix-blend-mode: difference;
+  font: inherit;
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slide-control:hover {
+  opacity: 0.65;
+}
+
+.slide-control:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+}
