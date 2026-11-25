@@ -392,37 +392,33 @@ body.desktop-mode .slide-media {
 }
 
 
-/* Homepage slideshow navigation */
-.slideshow-controls {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  pointer-events: none;
-}
+/* Homepage slideshow cursor navigation */
+@media (hover: hover) and (pointer: fine) {
+  body.homepage #slideshow {
+    cursor: none;
+  }
 
-.slide-control {
-  padding: 10px;
-  border: 0;
-  background: transparent;
-  color: white;
-  mix-blend-mode: difference;
-  font: inherit;
-  font-size: 40px;
-  line-height: 1;
-  cursor: pointer;
-  pointer-events: auto;
-  -webkit-tap-highlight-color: transparent;
-}
+  body.homepage .slideshow-cursor {
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    color: white;
+    mix-blend-mode: difference;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 38px;
+    line-height: 1;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 100ms ease-in-out;
+  }
 
-.slide-control:hover {
-  opacity: 0.65;
-}
-
-.slide-control:focus-visible {
-  outline: 1px solid currentColor;
-  outline-offset: 2px;
+  body.homepage .slideshow-cursor.visible {
+    opacity: 1;
+  }
 }
