@@ -424,20 +424,22 @@ body.desktop-mode .slide-media {
 }
 
 
-/* Desktop caption margin */
+
+
+/* Keep the bottom margin visible on desktop and responsive layouts */
+body.homepage .slide > .slide-media {
+  height: calc(100% - 73px);
+}
+
+body.homepage .slide-pair {
+  height: calc(100% - 73px);
+}
+
+body.homepage .slide-pair .pair-half {
+  overflow: visible;
+}
+
 @media screen and (min-width: 841px) {
-  body.homepage .slide > .slide-media {
-    height: calc(100% - 73px);
-  }
-
-  body.homepage .slide-pair {
-    height: calc(100% - 73px);
-  }
-
-  body.homepage .slide-pair .pair-half {
-    overflow: visible;
-  }
-
   body.homepage .slide-pair .slide-caption {
     bottom: -18px;
   }
