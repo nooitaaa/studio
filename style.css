@@ -394,7 +394,7 @@ body.desktop-mode .slide-media {
 
 /* Homepage slideshow cursor navigation */
 @media (hover: hover) and (pointer: fine) {
-  body.homepage #slideshow {
+  body.homepage.has-slide-cursor #slideshow {
     cursor: none;
   }
 
