@@ -427,11 +427,11 @@ body.desktop-mode .slide-media {
 /* Desktop caption margin */
 @media screen and (min-width: 841px) {
   body.homepage .slide > .slide-media {
-    height: calc(100% - 80px);
+    height: calc(100% - 68px);
   }
 
   body.homepage .slide-pair {
-    height: calc(100% - 80px);
+    height: calc(100% - 68px);
   }
 
   body.homepage .slide-pair .pair-half {
@@ -439,6 +439,6 @@ body.desktop-mode .slide-media {
   }
 
   body.homepage .slide-pair .slide-caption {
-    bottom: -30px;
+    bottom: -18px;
   }
 }
