@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Noa Merlini</title>
-    <link rel="stylesheet" href="style.css?v=2026-11-25-2">
+    <link rel="stylesheet" href="style.css?v=2026-11-25-3">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -552,15 +552,16 @@
 
         const slideshowContainer = document.getElementById('slideshow');
         const slideCursor = document.getElementById('slide-cursor');
+        if (slideCursor) document.body.classList.add('has-slide-cursor');
         const handleSlideCursorMove = event => {
-            if (event.pointerType === 'touch') return;
+            if (!slideCursor || event.pointerType === 'touch') return;
             const rect = slideshowContainer.getBoundingClientRect();
             slideCursor.textContent = event.clientX - rect.left < rect.width / 2 ? '−' : '+';
             slideCursor.style.left = `${event.clientX}px`;
             slideCursor.style.top = `${event.clientY}px`;
             slideCursor.classList.add('visible');
         };
-        const hideSlideCursor = () => slideCursor.classList.remove('visible');
+        const hideSlideCursor = () => slideCursor?.classList.remove('visible');
         slideshowContainer.addEventListener('pointermove', handleSlideCursorMove);
         slideshowContainer.addEventListener('pointerleave', hideSlideCursor);
         let lastTapTime = 0;
