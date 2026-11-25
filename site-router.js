@@ -5,7 +5,6 @@
 
   const stations = [
     { name: 'Rai Radio 3', page: 'https://www.raiplaysound.it/radio3', stream: 'https://icestreaming.rai.it/3.mp3' },
-    { name: 'Radio Popolare', page: 'https://www.radiopopolare.it/', stream: 'https://livex.radiopopolare.it/radiopop2' },
     { name: 'NTS Radio', page: 'https://www.nts.live/', stream: 'https://stream-relay-geo.ntslive.net/stream' },
   ];
   const desktopQuery = window.matchMedia('(min-width: 841px)');
