@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Noa Merlini</title>
-    <link rel="stylesheet" href="style.css?v=2026-11-25-1">
+    <link rel="stylesheet" href="style.css?v=2026-11-25-2">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -16,10 +16,7 @@
         <div id="page-content">
 
     <div class="slideshow-container fullscreen" id="slideshow">
-      <div class="slideshow-controls" aria-label="Controlli slideshow">
-        <button class="slide-control" id="slide-previous" type="button" aria-label="Slide precedente">−</button>
-        <button class="slide-control" id="slide-next" type="button" aria-label="Slide successiva">+</button>
-      </div>
+      <div class="slideshow-cursor" id="slide-cursor" aria-hidden="true"></div>
     </div>
 
     <a href="about.html" class="slideshow-caption">
@@ -555,12 +552,18 @@
         window.addEventListener('resize', handleResize);
 
         const slideshowContainer = document.getElementById('slideshow');
-        const previousSlideButton = document.getElementById('slide-previous');
-        const nextSlideButton = document.getElementById('slide-next');
-        const handlePreviousSlide = () => goToSlide(-1);
-        const handleNextSlide = () => goToSlide(1);
-        previousSlideButton.addEventListener('click', handlePreviousSlide);
-        nextSlideButton.addEventListener('click', handleNextSlide);
+        const slideCursor = document.getElementById('slide-cursor');
+        const handleSlideCursorMove = event => {
+            if (event.pointerType === 'touch') return;
+            const rect = slideshowContainer.getBoundingClientRect();
+            slideCursor.textContent = event.clientX - rect.left < rect.width / 2 ? '−' : '+';
+            slideCursor.style.left = `${event.clientX}px`;
+            slideCursor.style.top = `${event.clientY}px`;
+            slideCursor.classList.add('visible');
+        };
+        const hideSlideCursor = () => slideCursor.classList.remove('visible');
+        slideshowContainer.addEventListener('pointermove', handleSlideCursorMove);
+        slideshowContainer.addEventListener('pointerleave', hideSlideCursor);
         let lastTapTime = 0;
 
         function handleSlideNavigation(event) {
@@ -593,8 +596,8 @@
             window.removeEventListener('resize', handleResize);
             slideshowContainer.removeEventListener('touchstart', handleSlideNavigation);
             slideshowContainer.removeEventListener('pointerdown', handlePointerNavigation);
-            previousSlideButton.removeEventListener('click', handlePreviousSlide);
-            nextSlideButton.removeEventListener('click', handleNextSlide);
+            slideshowContainer.removeEventListener('pointermove', handleSlideCursorMove);
+            slideshowContainer.removeEventListener('pointerleave', hideSlideCursor);
             window.sitePageCleanup = null;
         };
       })();
