@@ -404,13 +404,13 @@ body.desktop-mode .slide-media {
     top: 0;
     left: 0;
     display: grid;
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     place-items: center;
     color: white;
     mix-blend-mode: difference;
     font-family: "Times New Roman", Times, serif;
-    font-size: 38px;
+    font-size: 28px;
     line-height: 1;
     pointer-events: none;
     opacity: 0;
@@ -427,11 +427,11 @@ body.desktop-mode .slide-media {
 /* Desktop caption margin */
 @media screen and (min-width: 841px) {
   body.homepage .slide > .slide-media {
-    height: calc(100% - 68px);
+    height: calc(100% - 73px);
   }
 
   body.homepage .slide-pair {
-    height: calc(100% - 68px);
+    height: calc(100% - 73px);
   }
 
   body.homepage .slide-pair .pair-half {
