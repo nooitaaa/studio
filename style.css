@@ -422,3 +422,23 @@ body.desktop-mode .slide-media {
     opacity: 1;
   }
 }
+
+
+/* Desktop caption margin */
+@media screen and (min-width: 841px) {
+  body.homepage .slide > .slide-media {
+    height: calc(100% - 80px);
+  }
+
+  body.homepage .slide-pair {
+    height: calc(100% - 80px);
+  }
+
+  body.homepage .slide-pair .pair-half {
+    overflow: visible;
+  }
+
+  body.homepage .slide-pair .slide-caption {
+    bottom: -30px;
+  }
+}
